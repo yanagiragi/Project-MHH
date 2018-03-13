@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class walkControl : MonoBehaviour {
+public class WalkControl : MonoBehaviour {
 
     public bool isWalk = true;
     public float scale = 1;

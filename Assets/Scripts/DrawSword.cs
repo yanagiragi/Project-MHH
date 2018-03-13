@@ -33,7 +33,7 @@ public class DrawSword : MonoBehaviour {
     {
         if (flag)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.6f);
             SwordInHip.SetActive(false);
             SwordInHand.SetActive(true);
         }

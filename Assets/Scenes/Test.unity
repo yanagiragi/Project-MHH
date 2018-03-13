@@ -211,19 +211,6 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 100388, guid: d6ae194b462cb804da0f3115aefe9461, type: 3}
   m_PrefabInternal: {fileID: 1754297233}
---- !u!114 &874108197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 874108194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b16bc05be454cc478b0c70a088c4386, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SwordInHip: {fileID: 934756592}
-  SwordInHand: {fileID: 1359282358}
 --- !u!114 &874108198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,7 +568,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: a6c09ebaf09d1774bbfca74d20bc031f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6c09ebaf09d1774bbfca74d20bc031f, type: 3}
