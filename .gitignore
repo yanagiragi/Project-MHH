@@ -34,3 +34,5 @@ sysinfo.txt
 *.unitypackage
 
 Assets/Plugins/
+Assets/Models/
+Assets/Animations/

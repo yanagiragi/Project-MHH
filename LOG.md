@@ -161,3 +161,9 @@
 * Day6, Day7 
 
     > 彈性
+
+# LOG
+
+> 用 mixamo + humanoid 比起 mixamo + generic 損失不少細節
+
+> MMD4Mecanim 應該轉出的fbx要跟模型在同一層 否則貼圖會抓不到
