@@ -78,6 +78,8 @@
 
 * LOD1:
 
+    * 第三接連段可以做集氣 或是弄出劍氣之類的
+
     * QTE
 
     * 怪物要聰明點 噴火
@@ -191,3 +193,7 @@
 > 動畫會往下掉 Orz, 貌似可以去import animation那邊直接條y offset
 
 > 下半身用inplace動畫 + 程式控制position 可行 只是可能沒有那麼漂亮
+
+> Idle 左 右 後 走路動畫
+
+    MingHan Bai：如果使用Animator Component，且勾選Apply Root Motion。　請到該動畫的FBX檔案中的Animation頁籤，Root Transform Position Y 請勾選或取消勾選Bake，因為角色動畫的Root有上下位移，如果使用Apply Root Motion會因此影響角色的Y軸。　如果還是有異狀，嘗試調整Based Upon 為 Feet。　https://docs.unity3d.com/Manual/RootMotion.html
