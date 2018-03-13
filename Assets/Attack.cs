@@ -39,7 +39,7 @@ public class Attack : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) && canStartAttackFlag)
         {
             // 第一個連段
-            if (!startAttackFlag) // First Attack
+            if (!startAttackFlag && animController.GetBool("Draw")) // First Attack
 
             {
                 startAttackFlag = true;

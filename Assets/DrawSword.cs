@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class DrawSword : MonoBehaviour {
 
-	// Use this for initialization
+    public float interval;
+
+    Animator animController;
+    float time = 0;
+
 	void Start () {
-		
+        animController = GetComponent<Animator>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
-		
+        if(time > 0)
+            time -= Time.deltaTime;
+
+        if (Input.GetKeyUp(KeyCode.R) && time <= 0)
+        {
+            time = interval;
+            animController.SetBool("Draw", !animController.GetBool("Draw"));
+        }
 	}
 }
