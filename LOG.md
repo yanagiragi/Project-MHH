@@ -167,3 +167,19 @@
 > 用 mixamo + humanoid 比起 mixamo + generic 損失不少細節
 
 > MMD4Mecanim 應該轉出的fbx要跟模型在同一層 否則貼圖會抓不到
+
+> TDA Office Haku 的問題是因為腿太長了 不符合比例 所以套動畫動起來很怪
+
+> 看起來透過直接修改動畫的骨頭名字成2b.fbx裡面想map到的骨頭名稱比起 讓Unity抓 humanoid自己map來的可控性多一點，不過實驗的結果是即便如此微調成適合2B的動畫還是要花上不少功夫
+
+> 用 mixamo rig 玩的角色基本上問題比較少
+
+> 先用MMD4Mecanim 轉成fbx(這樣才能保留UV)，在進max刪掉骨頭，再丟上去mixamo autorig，再套他的動畫
+
+> 如果直接用pmxeditor 轉成 obj，會有材質丟失的問題(沒經過mixamoUV會保留，不過材質應該還要再調整)
+
+> 如果直接跟mtl 跟 貼圖包在一起上傳mixamo，會抓不到的樣子
+
+> 如果沒有刪掉骨頭，MMD4Mecanim的骨頭對mixamo 的 mapping 沒那麼好，可能直接失敗or抓錯(TDA Office Haku的骨頭型態就是因為太特別所以下半身抓不到)
+
+    90.!joint_koshikyanserumigi > 100.joint_RightHipD > 101.joint_RightKneeD > 102.joint_RightFootD > 103.joint_migiashisakiEX
