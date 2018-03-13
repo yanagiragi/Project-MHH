@@ -164,11 +164,11 @@
 
 # LOG
 
-> 用 mixamo + humanoid 比起 mixamo + generic 損失不少細節
+> 用 mixamo + humanoid 比起 mixamo + generic 損失不少細節 (後續：使用腳部的IK就好多了)
 
 > MMD4Mecanim 應該轉出的fbx要跟模型在同一層 否則貼圖會抓不到
 
-> TDA Office Haku 的問題是因為腿太長了 不符合比例 所以套動畫動起來很怪
+> TDA Office Haku 的問題是因為腿太長了 不符合比例 所以套動畫動起來很怪 (後續：不是主要原因)
 
 > 看起來透過直接修改動畫的骨頭名字成2b.fbx裡面想map到的骨頭名稱比起 讓Unity抓 humanoid自己map來的可控性多一點，不過實驗的結果是即便如此微調成適合2B的動畫還是要花上不少功夫
 
@@ -187,3 +187,5 @@
 > 因為實在不知道怎麼處理mixamo裡面root motion的問題，所以最後的解決方式如下；
 
     還是讓他用mecanim控制器 + Apply Root Motion, 不過記得要到Animator裡面每個State裡面點開 Foot IK, 不然腳會炸掉
+
+> 動畫會往下掉 Orz, 貌似可以去import animation那邊直接條y offset
