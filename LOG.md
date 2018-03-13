@@ -189,3 +189,5 @@
     還是讓他用mecanim控制器 + Apply Root Motion, 不過記得要到Animator裡面每個State裡面點開 Foot IK, 不然腳會炸掉
 
 > 動畫會往下掉 Orz, 貌似可以去import animation那邊直接條y offset
+
+> 下半身用inplace動畫 + 程式控制position 可行 只是可能沒有那麼漂亮
