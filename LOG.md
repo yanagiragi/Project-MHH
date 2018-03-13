@@ -183,3 +183,7 @@
 > 如果沒有刪掉骨頭，MMD4Mecanim的骨頭對mixamo 的 mapping 沒那麼好，可能直接失敗or抓錯(TDA Office Haku的骨頭型態就是因為太特別所以下半身抓不到)
 
     90.!joint_koshikyanserumigi > 100.joint_RightHipD > 101.joint_RightKneeD > 102.joint_RightFootD > 103.joint_migiashisakiEX
+
+> 因為實在不知道怎麼處理mixamo裡面root motion的問題，所以最後的解決方式如下；
+
+    還是讓他用mecanim控制器 + Apply Root Motion, 不過記得要到Animator裡面每個State裡面點開 Foot IK, 不然腳會炸掉
