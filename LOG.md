@@ -166,34 +166,55 @@
 
 # LOG
 
-> 用 mixamo + humanoid 比起 mixamo + generic 損失不少細節 (後續：使用腳部的IK就好多了)
+* Day 1:
 
-> MMD4Mecanim 應該轉出的fbx要跟模型在同一層 否則貼圖會抓不到
+    <details>
 
-> TDA Office Haku 的問題是因為腿太長了 不符合比例 所以套動畫動起來很怪 (後續：不是主要原因)
+    <summary>Note:</summary>
 
-> 看起來透過直接修改動畫的骨頭名字成2b.fbx裡面想map到的骨頭名稱比起 讓Unity抓 humanoid自己map來的可控性多一點，不過實驗的結果是即便如此微調成適合2B的動畫還是要花上不少功夫
+    > 用 mixamo + humanoid 比起 mixamo + generic 損失不少細節 (後續：使用腳部的IK就好多了)
 
-> 用 mixamo rig 玩的角色基本上問題比較少
+    > MMD4Mecanim 應該轉出的fbx要跟模型在同一層 否則貼圖會抓不到
 
-> 先用MMD4Mecanim 轉成fbx(這樣才能保留UV)，在進max刪掉骨頭，再丟上去mixamo autorig，再套他的動畫
+    > TDA Office Haku 的問題是因為腿太長了 不符合比例 所以套動畫動起來很怪 (後續：不是主要原因)
 
-> 如果直接用pmxeditor 轉成 obj，會有材質丟失的問題(沒經過mixamoUV會保留，不過材質應該還要再調整)
+    > 看起來透過直接修改動畫的骨頭名字成2b.fbx裡面想map到的骨頭名稱比起 讓Unity抓 humanoid自己map來的可控性多一點，不過實驗的結果是即便如此微調成適合2B的動畫還是要花上不少功夫
 
-> 如果直接跟mtl 跟 貼圖包在一起上傳mixamo，會抓不到的樣子
+    > 用 mixamo rig 玩的角色基本上問題比較少
 
-> 如果沒有刪掉骨頭，MMD4Mecanim的骨頭對mixamo 的 mapping 沒那麼好，可能直接失敗or抓錯(TDA Office Haku的骨頭型態就是因為太特別所以下半身抓不到)
+    > 先用MMD4Mecanim 轉成fbx(這樣才能保留UV)，在進max刪掉骨頭，再丟上去mixamo autorig，再套他的動畫
 
-    90.!joint_koshikyanserumigi > 100.joint_RightHipD > 101.joint_RightKneeD > 102.joint_RightFootD > 103.joint_migiashisakiEX
+    > 如果直接用pmxeditor 轉成 obj，會有材質丟失的問題(沒經過mixamoUV會保留，不過材質應該還要再調整)
 
-> 因為實在不知道怎麼處理mixamo裡面root motion的問題，所以最後的解決方式如下；
+    > 如果直接跟mtl 跟 貼圖包在一起上傳mixamo，會抓不到的樣子
 
-    還是讓他用mecanim控制器 + Apply Root Motion, 不過記得要到Animator裡面每個State裡面點開 Foot IK, 不然腳會炸掉
+    > 如果沒有刪掉骨頭，MMD4Mecanim的骨頭對mixamo 的 mapping 沒那麼好，可能直接失敗or抓錯(TDA Office Haku的骨頭型態就是因為太特別所以下半身抓不到)
 
-> 動畫會往下掉 Orz, 貌似可以去import animation那邊直接條y offset
+        90.!joint_koshikyanserumigi > 100.joint_RightHipD > 101.joint_RightKneeD > 102.joint_RightFootD > 103.joint_migiashisakiEX
 
-> 下半身用inplace動畫 + 程式控制position 可行 只是可能沒有那麼漂亮
+    > 因為實在不知道怎麼處理mixamo裡面root motion的問題，所以最後的解決方式如下；
 
-> Idle 左 右 後 走路動畫
+        還是讓他用mecanim控制器 + Apply Root Motion, 不過記得要到Animator裡面每個State裡面點開 Foot IK, 不然腳會炸掉
 
-    MingHan Bai：如果使用Animator Component，且勾選Apply Root Motion。　請到該動畫的FBX檔案中的Animation頁籤，Root Transform Position Y 請勾選或取消勾選Bake，因為角色動畫的Root有上下位移，如果使用Apply Root Motion會因此影響角色的Y軸。　如果還是有異狀，嘗試調整Based Upon 為 Feet。　https://docs.unity3d.com/Manual/RootMotion.html
+    > 動畫會往下掉 Orz, 貌似可以去import animation那邊直接條y offset
+
+    > 下半身用inplace動畫 + 程式控制position 可行 只是可能沒有那麼漂亮
+
+    > Idle 左 右 後 走路動畫
+
+        MingHan Bai：如果使用Animator Component，且勾選Apply Root Motion。　請到該動畫的FBX檔案中的Animation頁籤，Root Transform Position Y 請勾選或取消勾選Bake，因為角色動畫的Root有上下位移，如果使用Apply Root Motion會因此影響角色的Y軸。　如果還是有異狀，嘗試調整Based Upon 為 Feet。　https://docs.unity3d.com/Manual/RootMotion.html
+
+    </details>
+
+    
+    <details>
+
+    <summary>Bugs require Fix:</summary>
+
+        > Idle 左 右 後 走路動畫
+
+        > 下半身用inplace動畫 + 程式控制position 可行 只是可能沒有那麼漂亮
+
+        > LOD1: Haku的動畫再漂亮一點點
+
+    </details>
