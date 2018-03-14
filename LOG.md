@@ -230,9 +230,22 @@
 
     > 喝水動畫 (不過腳部有一些小瑕疵)
 
+    > 不知道為甚麼重新import MMD4Mecanim就可以抓到morph (MMD4Mecanim Model)了, 不過 Bullet Physics 又變糟糕了
+
+    > 喝水動畫 好像再跑步的時候按會有blending沒有很漂亮的狀況
+
+    > 具體而言要怎麼實現 怪物打到你的碰撞 這點要想一下，用Kinematic 好像沒有辦法使用 Mass的性質
+
+        也許真的只能用trigger, 只要隨時有撞到就算反向vector推開
+
+        要判別碰到 & 被攻擊到的差異
+
+
     Not:    
 
     > 受傷動畫
+
+    > 盾的動畫
 
     > 怪物動畫    
 
