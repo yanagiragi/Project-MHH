@@ -224,15 +224,21 @@
 
     > 不要讓他自動挑選windows Graphic API, MMD4Mecanim 會出不來
 
+    > Combo 4 先丟著 需要修bug
+
+    > 跑步動畫 只有前跑才有 後面走也有 但是只有1.1倍 有點難感覺到
+
     Not:
+
+    > 喝水動畫
 
     > 受傷動畫
 
-    > 跑步動畫
+    > 特殊招式?
 
     > 怪物動畫
 
-    > 特殊招式?
+    
 
     <details>
     <summary>Bugs require Fix:</summary>

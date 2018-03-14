@@ -14,6 +14,8 @@ public class Attack : MonoBehaviour {
     [Header("(forward, backward, left, right)")]
     public Vector4 rollScaleFactor = Vector4.one;
 
+    public float runScale = 1.1f;
+
     [Header("Control")]
     [SerializeField]
     private float inputH;
@@ -24,6 +26,8 @@ public class Attack : MonoBehaviour {
     private bool canWalk = true;
     [SerializeField]
     private bool isWalk = true;
+    [SerializeField]
+    private bool isRun = false;
 
     [SerializeField]
     private bool canRoll = true;
@@ -53,20 +57,43 @@ public class Attack : MonoBehaviour {
     
     void Update () {
 
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        //float mouseX = Input.GetAxis("Mouse X");
+        //transform.Rotate(new Vector3(0, mouseX, 0));
 
-        //transform.Translate(new Vector3(mouseX, 0, mouseY));
-        transform.Rotate(new Vector3(0, mouseX, 0));
+        float mouseX2 = Input.GetAxis("Horizontal");
+        transform.Rotate(new Vector3(0, mouseX2, 0));
 
         #region Walk Part
-        if (Input.GetKeyDown(KeyCode.Space) && canRoll && !isRoll)
+
+
+        inputH = Input.GetAxis("Horizontal");
+        inputV = Input.GetAxis("Vertical");
+
+        isWalk = ((Mathf.Abs(inputH) - epsilon) > threshold) || ((Mathf.Abs(inputV) - epsilon) > threshold);
+        isWalk &= animController.GetInteger("Attack") == 0 && animController.GetLayerWeight(1) == 1 && canWalk;
+
+        animController.SetBool("Walk", isWalk);
+        //animController.SetFloat("InputH", inputH);
+        animController.SetFloat("InputV", inputV);
+
+        isRun = Input.GetKey(KeyCode.LeftShift);
+
+        if (Input.GetKeyDown(KeyCode.Q) && canRoll && !isRoll && canStartAttackFlag && !startAttackFlag)
+        {
+            animController.SetBool("UsingItem", true);
+            //StartCoroutine(DelayAdjustWeight(2, 0));
+            //StartCoroutine(DelayAdjustWeight("UsingItem", false, -1, delegate { animController.SetLayerWeight(2, .46f); }, 1f));
+            StartCoroutine(DelayAdjustWeight("UsingItem", false, -1));
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Space) && canRoll && !isRoll && inputV > 0)
         {
             // 必須要是Idle才能翻滾，取消動作的感覺用武器完多久回歸canStartAttack的方式控制
             if (attackNum == 0 && !startAttackFlag && canStartAttackFlag)
             { 
                 canRoll = false;
                 isRoll = true;
+                isRun = false;
                 animController.SetBool("Roll", isRoll);
 
                 canWalk = false;
@@ -78,27 +105,38 @@ public class Attack : MonoBehaviour {
             }
         }
 
+        animController.SetBool("Run", isRun);
+
         //inputH = Mathf.Lerp(inputH, Input.GetAxis("Horizontal"), Time.deltaTime);
         //inputV = Mathf.Lerp(inputV, Input.GetAxis("Vertical"), Time.deltaTime);
 
-        inputH = Input.GetAxis("Horizontal");
-        inputV = Input.GetAxis("Vertical");
-
-        isWalk = ((Mathf.Abs(inputH) - epsilon) > threshold) || ((Mathf.Abs(inputV) - epsilon) > threshold);
-        isWalk &= animController.GetInteger("Attack") == 0 && animController.GetLayerWeight(1) == 1 && canWalk;
-        
-        animController.SetBool("Walk", isWalk);
-        animController.SetFloat("InputH", inputH);
-        animController.SetFloat("InputV", inputV);
 
         // 收劍的動作要讓腳sync的上半身layer影響小一點
         if (isWalk)
         {
             float scaleH = (inputH > 0f) ? scaleFactor.w : scaleFactor.z;
             float scaleV = (inputV > 0f) ? scaleFactor.x : scaleFactor.y;
+
+            if (isRun)
+            {
+                if (inputV < 0f)
+                    scaleV *= 1.1f;
+                else
+                    scaleV *= runScale;
+                
+                Debug.Log("Run");
+
+                //animController.speed = 2;
+            }
+            //else
+            //{
+            //    animController.speed = 1;
+            //}
+
             transform.position = Vector3.Lerp(transform.position, transform.position + transform.forward * scaleV * inputV, Time.deltaTime);
-            transform.position = Vector3.Lerp(transform.position, transform.position + transform.right * scaleH * inputH, Time.deltaTime);
+            //transform.position = Vector3.Lerp(transform.position, transform.position + transform.right * scaleH * inputH, Time.deltaTime);
         }
+
         #endregion
 
         #region Attack Part
@@ -122,10 +160,14 @@ public class Attack : MonoBehaviour {
                 if (innerTime > intervalBetweenAttacks[attackNum])
                 {
                     ++attackNum;
+                    Debug.Log("Perform Combo at innerTime: " + innerTime);
+                    Debug.Log("Perform Combo: " + attackNum);
                     animController.SetInteger("Attack", attackNum);
                     innerTime = 0;
-                }
+                    Debug.Log("Press After   " + intervalBetweenAttacks[attackNum] + " seconds.");
+                    Debug.Log("Press Befeore " + intervalBetweenAttacks[attackNum + 1] + " seconds.");
 
+                }
             }
         }
 
@@ -136,6 +178,7 @@ public class Attack : MonoBehaviour {
             (innerTime > intervalBetweenAttacks[attackNum + 1] || attackNum >= intervalBetweenAttacks.Length - 1)
         )
         {
+            Debug.Log("Combo " + attackNum + " Time Expires");
             StartCoroutine(restoreFlag(attackNum));
             if (attackNum == 3)
             {
@@ -257,8 +300,19 @@ public class Attack : MonoBehaviour {
 
     IEnumerator restoreFlag(int atk)
     {
-        Debug.Log(atk);
-        if (atk == 3)
+        Debug.Log("End Combo: " + atk);
+        if (atk == 4)
+        {
+            attackNum = 0;
+            animController.SetInteger("Attack", attackNum); // Addition Adjust Attack to Sync Leg Layer
+
+            yield return new WaitForSeconds(1.5f);
+            canStartAttackFlag = true;
+
+            if (animController.GetLayerWeight(1) != 1f && attackNum == 0)
+                animController.SetLayerWeight(1, 1);
+        }
+        else if (atk == 3)
         {
             // original value: 1.2f, 1.5f, 2f
             float prefixTime = 1.2f;
