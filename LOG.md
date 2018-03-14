@@ -230,6 +230,12 @@
 
     > 跑步動畫 只有前跑才有 後面走也有 但是只有1.1倍 有點難感覺到
 
+    > 跑步拔劍
+
+    > 跑步無法翻滾
+
+    > 應該喝藥水那邊有foot IK沒有處理好
+
     > 喝水動畫 (不過腳部有一些小瑕疵)
 
     > 不知道為甚麼重新import MMD4Mecanim就可以抓到morph (MMD4Mecanim Model)了, 不過 Bullet Physics 又變糟糕了
@@ -238,23 +244,40 @@
 
     > 受傷動畫 不過起來後rotation會有點變 此外起來時的動畫有點小位移 (應該是要調Blending)
 
+    > Layer 2 Hit Blending 調整
+
     > 具體而言要怎麼實現 怪物打到你的碰撞 這點要想一下，用Kinematic 好像沒有辦法使用 Mass的性質
 
         也許真的只能用trigger, 只要隨時有撞到就算反向vector推開
 
-        要判別碰到 & 被攻擊到的差異
-
-
-    Not:    
-    
-    > 盾的動畫
-
-    > 怪物動畫    
+        要判別碰到 & 被攻擊到的差異 
 
     <details>
     <summary>Bugs require Fix:</summary>
 
+        LOD0:
+
+        > 跑步拔劍動畫怪怪的 (關掉Layer2 好像還是一樣)
+
+        > 跑步無法翻滾
+
+        > 應該喝藥水那邊有foot IK沒有處理好
+
+        > 盾的動畫
+
+        > 怪物動畫    
+
+        LOD1: 
+
         > Idle 走路動畫 快速切換會有點跳格
+
+        > Combo 4 先丟著 需要修bug
+
+        > 受傷動畫 不過起來後rotation會有點變 此外起來時的動畫有點小位移 (應該是要調Blending)
+
+        > LOD1: Hit Blending 調整
+
+        > LOD1: 喝水動畫 (不過腳部有一些小瑕疵)
 
         > LOD1: 走路動畫 -> 攻擊動畫 Fade會有點跳格
 
