@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour {
 
-    // sum of intervalBetweenAttacks < intervalBetweenWholeAttacks
     // 第0個必須為0 最後一個很小值
+    [Tooltip("x 到 x + 1 的值代表要打出這個連段要在前一個動作的x秒後, x+1秒之前按")]
     public float[] intervalBetweenAttacks;
-    
-    public float intervalBetweenWholeAttacks;
-    public int attackNum = 0;
 
+    [SerializeField]
+    private int attackNum = 0;
     [SerializeField]
     private bool canStartAttackFlag = true;
     [SerializeField]
@@ -19,20 +18,16 @@ public class Attack : MonoBehaviour {
     private float innerTime;
     
     private Animator animController;
-
-	void Start () {
+    
+    void Start () {
         innerTime = intervalBetweenAttacks[0];
         animController = GetComponent<Animator>();
-
-        // TODO
-        // check sum of intervalBetweenAttacks < intervalBetweenWholeAttacks
     }
 
     void Update () {
 
         if (startAttackFlag)
         {
-            //outerTime -= Time.deltaTime;
             innerTime += Time.deltaTime;
         }
 
@@ -44,7 +39,7 @@ public class Attack : MonoBehaviour {
                 startAttackFlag = true;
                 ++attackNum;
                 animController.SetInteger("Attack", attackNum);
-                animController.SetLayerWeight(1, 0);
+                StartCoroutine(DelayAdjustWeight(1, 0));
             }
             else // 之後的連段
             {
@@ -78,6 +73,25 @@ public class Attack : MonoBehaviour {
         
 	}
 
+    IEnumerator DelayAdjustWeight(int layer, float weight)
+    {
+        float delay = 0.1f;
+        yield return new WaitForSeconds(delay);
+        animController.SetLayerWeight(layer, weight);
+
+        // Need More tweak on walk->Attake Fade
+
+        // Below: weight drop too fast
+        //float initWeight = animController.GetLayerWeight(layer);
+        //float time = 0;
+        //while((time += Time.deltaTime) < delay && animController.GetLayerWeight(layer) > weight)
+        //{
+        //    animController.SetLayerWeight(layer, (initWeight - weight) / delay * Time.deltaTime);
+        //    yield return null;
+        //}
+
+    }
+
     IEnumerator restoreFlag(int atk)
     {
         Debug.Log(atk);
@@ -86,13 +100,13 @@ public class Attack : MonoBehaviour {
             float prefixTime = 1.2f;
             yield return new WaitForSeconds(prefixTime);
             attackNum = 0;
-            animController.SetInteger("Attack", attackNum);
+            animController.SetInteger("Attack", attackNum); // Addition Adjust Attack to Sync Leg Layer
 
             yield return new WaitForSeconds(1.5f - prefixTime);
             canStartAttackFlag = true;
 
             yield return new WaitForSeconds(2.0f - 1.5f);
-            if(animController.GetLayerWeight(1) == 0 && attackNum == 0)
+            if(animController.GetLayerWeight(1) != 1f && attackNum == 0)
                 animController.SetLayerWeight(1, 1);
         }
         else if (atk == 2)
@@ -100,7 +114,7 @@ public class Attack : MonoBehaviour {
             yield return new WaitForSeconds(.2f);
             canStartAttackFlag = true;
             yield return new WaitForSeconds(.4f - .2f);
-            if (animController.GetLayerWeight(1) == 0 && attackNum == 0)
+            if (animController.GetLayerWeight(1) != 1f && attackNum == 0)
                 animController.SetLayerWeight(1, 1);
         }
         else if (atk == 1)
@@ -108,7 +122,7 @@ public class Attack : MonoBehaviour {
             yield return new WaitForSeconds(.2f);
             canStartAttackFlag = true;
             yield return new WaitForSeconds(.6f - .2f);
-            if (animController.GetLayerWeight(1) == 0 && attackNum == 0)
+            if (animController.GetLayerWeight(1) != 1f && attackNum == 0)
                 animController.SetLayerWeight(1, 1);
         }
 

@@ -46,8 +46,10 @@ public class WalkControl : MonoBehaviour {
         {
             float scaleH = (inputH > 0f) ? scaleFactor.w : scaleFactor.z;
             float scaleV = (inputV > 0f) ? scaleFactor.x : scaleFactor.y;
-            transform.position += transform.forward * scaleV * inputV;
-            transform.position += transform.right * scaleH * inputH;
+            transform.position = Vector3.Lerp(transform.position, transform.position + transform.forward * scaleV * inputV, Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, transform.position + transform.right * scaleH * inputH, Time.deltaTime);
+            //transform.position += transform.forward * scaleV * inputV * Time.deltaTime;
+            //transform.position += transform.right * scaleH * inputH * Time.deltaTime;
         }
         else
         {
