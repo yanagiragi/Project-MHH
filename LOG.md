@@ -218,6 +218,16 @@
     
     > Idle 左 右 後 走路動畫 好了，不過快速切換會有點跳格
 
+    Not:
+
+    > 受傷動畫
+
+    > 跑步動畫
+
+    > 怪物動畫
+
+    > 特殊招式?
+
     <details>
     <summary>Bugs require Fix:</summary>
 
