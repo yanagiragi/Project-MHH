@@ -82,7 +82,7 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
-    m_Name: Leg Layer2
+    m_Name: Upper Body FeedBack Layer
     m_StateMachine: {fileID: 1107611653426157642}
     m_Mask: {fileID: 31900000, guid: 4aa627ab6175f5d498d3c14d8ae69e81, type: 2}
     m_Motions:
@@ -1515,7 +1515,7 @@ AnimatorStateMachine:
     m_Position: {x: 756, y: -216, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102613336619184376}
-    m_Position: {x: 108, y: -168, z: 0}
+    m_Position: {x: 132, y: -156, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102165130844378004}
     m_Position: {x: 252, y: 36, z: 0}
@@ -1527,13 +1527,13 @@ AnimatorStateMachine:
     m_Position: {x: 456, y: 216, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102230602829579306}
-    m_Position: {x: 936, y: -120, z: 0}
+    m_Position: {x: 936, y: -84, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102176584943539554}
     m_Position: {x: 936, y: 12, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102692273713968162}
-    m_Position: {x: 936, y: 84, z: 0}
+    m_Position: {x: 936, y: 96, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -1586,7 +1586,7 @@ AnimatorStateMachine:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Leg Layer2
+  m_Name: Upper Body FeedBack Layer
   m_ChildStates: []
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
