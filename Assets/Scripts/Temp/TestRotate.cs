@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TestRotate : MonoBehaviour {
 
+    public Transform target;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -16,7 +18,10 @@ public class TestRotate : MonoBehaviour {
         float max = 11.58f * 2;
         float inputH = Input.GetAxis("Horizontal");
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(new Vector3(8.879001f, inputH * max, 0)), Time.deltaTime);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(new Vector3(8.879001f, inputH * max, 0)), Time.deltaTime);
+        //transform.rotation = target.rotation;
+        transform.LookAt(target); 
+
 
 
     }

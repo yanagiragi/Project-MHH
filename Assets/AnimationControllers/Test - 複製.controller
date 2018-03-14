@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Test
+  m_Name: "Test - \u8907\u88FD"
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: flag
@@ -106,7 +106,7 @@ AnimatorController:
       m_Motion: {fileID: 206155440848453486}
     - serializedVersion: 2
       m_State: {fileID: 1102063039281917310}
-      m_Motion: {fileID: 7400000, guid: e94ada8d32af996458c11c15d2cb30a8, type: 3}
+      m_Motion: {fileID: 7400000, guid: ffc9823a2a9c1464d964b0bc5c95b4f4, type: 3}
     - serializedVersion: 2
       m_State: {fileID: 1102552624728348102}
       m_Motion: {fileID: 7400000, guid: def01dda06e597b4bb28332df248a316, type: 3}
@@ -1395,7 +1395,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e94ada8d32af996458c11c15d2cb30a8, type: 3}
+  m_Motion: {fileID: 7400000, guid: ffc9823a2a9c1464d964b0bc5c95b4f4, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1858,7 +1858,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e94ada8d32af996458c11c15d2cb30a8, type: 3}
+  m_Motion: {fileID: 7400000, guid: ffc9823a2a9c1464d964b0bc5c95b4f4, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

@@ -10,7 +10,10 @@ public class Attack : MonoBehaviour {
     
     [Header("(forward, backward, left, right)")]
     public Vector4 scaleFactor = Vector4.one;
-    
+
+    [Header("(forward, backward, left, right)")]
+    public Vector4 rollScaleFactor = Vector4.one;
+
     [Header("Control")]
     [SerializeField]
     private float inputH;
@@ -50,6 +53,11 @@ public class Attack : MonoBehaviour {
     
     void Update () {
 
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        //transform.Translate(new Vector3(mouseX, 0, mouseY));
+        transform.Rotate(new Vector3(0, mouseX, 0));
 
         #region Walk Part
         if (Input.GetKeyDown(KeyCode.Space) && canRoll && !isRoll)
@@ -65,7 +73,8 @@ public class Attack : MonoBehaviour {
                 isWalk = false;
 
                 // -1f for end of frame
-                StartCoroutine(DelayAdjustWeight("Roll", false, .3f, delegate { isRoll = false; }, .8f, delegate { canRoll = true; canWalk = true; }));
+                //StartCoroutine(DelayAdjustWeight("Roll", false, .3f, delegate { isRoll = false; }, .8f, delegate { canRoll = true; canWalk = true; }));
+                StartCoroutine(PerformRoll());
             }
         }
 
@@ -143,6 +152,62 @@ public class Attack : MonoBehaviour {
         }
 
         #endregion
+
+    }
+
+    IEnumerator PerformRoll()
+    {
+        // StartCoroutine(DelayAdjustWeight("Roll", false, .3f, delegate { isRoll = false; }, .8f, delegate { canRoll = true; canWalk = true; }));
+
+        float time = 0;
+
+        //float h = 0.0f;
+        //float v = 1.0f;
+
+        float h = inputH;
+        float v = inputV;
+
+        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(h, 0f, v), Vector3.up), Time.deltaTime);
+        //Vector3 trans = transform.TransformDirection(new Vector3(inputH, 0f, inputV));
+        //Vector3 newVec = new Vector3(inputH, 0f, inputV);
+        //transform.rotation = Quaternion.LookRotation(trans, Vector3.up);
+        
+
+        while (time < 0.3f)
+        {
+            time += Time.deltaTime;
+            float scaleH = (h > 0f) ? rollScaleFactor.w : rollScaleFactor.z;
+            float scaleV = (v > 0f) ? rollScaleFactor.x : rollScaleFactor.y;
+            //scaleV = scaleV * (v > 0 ? 1f : -1f);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(h, 0f, v), Vector3.up), Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, transform.position + transform.forward * scaleV, Time.deltaTime);
+            //transform.position = Vector3.Lerp(transform.position, transform.position + transform.right * scaleH, Time.deltaTime);
+            yield return null;
+        }
+
+        //yield return new WaitForSeconds(.3f);
+
+        animController.SetBool("Roll", false);
+        isRoll = false;
+
+        time = 0;
+        while (time < 0.9f)
+        {
+            time += Time.deltaTime;
+            float scaleH = (h > 0f) ? rollScaleFactor.w : rollScaleFactor.z;
+            float scaleV = (v > 0f) ? rollScaleFactor.x : rollScaleFactor.y;
+            //scaleV = scaleV * (v > 0 ? 1f : -1f);
+            transform.position = Vector3.Lerp(transform.position, transform.position + transform.forward * scaleV , Time.deltaTime);
+            //transform.position = Vector3.Lerp(transform.position, transform.position + transform.right * scaleH, Time.deltaTime);
+            yield return null;
+        }
+
+        Debug.Log("Done");
+
+        //yield return new WaitForSeconds(.8f);
+        canRoll = true;
+        canWalk = true;
+
 
     }
 
