@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class follow : MonoBehaviour {
 
+    public float smooth = 3.0f;
     public GameObject Follow;
 
     Vector3 offset;
@@ -15,6 +16,6 @@ public class follow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = Follow.transform.position + offset;
+        transform.position = Vector3.Lerp( transform.position, Follow.transform.position + offset, Time.deltaTime * smooth);
     }
 }
