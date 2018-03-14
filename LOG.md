@@ -168,10 +168,6 @@
 
 * Day 1:
 
-    <details>
-
-    <summary>Note:</summary>
-
     > 用 mixamo + humanoid 比起 mixamo + generic 損失不少細節 (後續：使用腳部的IK就好多了)
 
     > MMD4Mecanim 應該轉出的fbx要跟模型在同一層 否則貼圖會抓不到
@@ -204,16 +200,30 @@
 
         MingHan Bai：如果使用Animator Component，且勾選Apply Root Motion。　請到該動畫的FBX檔案中的Animation頁籤，Root Transform Position Y 請勾選或取消勾選Bake，因為角色動畫的Root有上下位移，如果使用Apply Root Motion會因此影響角色的Y軸。　如果還是有異狀，嘗試調整Based Upon 為 Feet。　https://docs.unity3d.com/Manual/RootMotion.html
 
-    </details>
-
     
     <details>
-
     <summary>Bugs require Fix:</summary>
 
         > Idle 左 右 後 走路動畫
 
         > 下半身用inplace動畫 + 程式控制position 可行 只是可能沒有那麼漂亮
+
+        >> 被攻擊的動畫
+
+        > LOD1: Haku的動畫再漂亮一點點
+
+    </details>
+
+* Day 2:
+    
+    > Idle 左 右 後 走路動畫 好了，不過快速切換會有點跳格
+
+    <details>
+    <summary>Bugs require Fix:</summary>
+
+        > Idle 走路動畫 快速切換會有點跳格
+
+        > LOD1: 走路動畫 -> 攻擊動畫 Fade會有點跳格
 
         > LOD1: Haku的動畫再漂亮一點點
 
