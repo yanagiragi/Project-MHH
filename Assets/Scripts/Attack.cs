@@ -44,6 +44,9 @@ public class Attack : MonoBehaviour {
     [SerializeField]
     private float innerTime;
 
+    [SerializeField]
+    private bool isHit = false;
+
     private float threshold = 0.05f;
     private float epsilon = 0.01f;
     private Animator animController;
@@ -54,8 +57,50 @@ public class Attack : MonoBehaviour {
     }
 
     delegate void callback();
-    
+
+    IEnumerator aaa()
+    {
+        yield return new WaitForSeconds(.2f);
+        GetComponent<Animator>().SetBool("Hit", false);
+
+        yield return new WaitForSeconds(3.8f);
+
+        isHit = false;
+        canWalk = true;
+        isWalk = false;
+        isRun = false;
+        canRoll = true;
+        isRoll = false;
+        canStartAttackFlag = true;
+        startAttackFlag = false;
+    }
+
     void Update () {
+
+        // Temporary Flag
+        if (Input.GetKeyDown(KeyCode.C) && !isHit)
+        {
+            isHit = true;
+            GetComponent<Animator>().SetBool("Hit", true);
+            StartCoroutine(aaa());
+        }
+        
+        if (isHit)
+        {
+            canWalk = false;
+            isWalk = false;
+            isRun = false;
+            animController.SetBool("Run", isRun);
+            canRoll = false;
+            isRoll = false;
+            canStartAttackFlag = false;
+            startAttackFlag = false;
+            attackNum = 0;
+            inputH = 0;
+            inputV = 0;
+            animController.SetInteger("Attack", attackNum);
+            return;            
+        }
 
         //float mouseX = Input.GetAxis("Mouse X");
         //transform.Rotate(new Vector3(0, mouseX, 0));
@@ -64,7 +109,6 @@ public class Attack : MonoBehaviour {
         transform.Rotate(new Vector3(0, mouseX2, 0));
 
         #region Walk Part
-
 
         inputH = Input.GetAxis("Horizontal");
         inputV = Input.GetAxis("Vertical");
@@ -112,7 +156,7 @@ public class Attack : MonoBehaviour {
 
 
         // 收劍的動作要讓腳sync的上半身layer影響小一點
-        if (isWalk)
+        if (isWalk && !isHit)
         {
             float scaleH = (inputH > 0f) ? scaleFactor.w : scaleFactor.z;
             float scaleV = (inputV > 0f) ? scaleFactor.x : scaleFactor.y;
