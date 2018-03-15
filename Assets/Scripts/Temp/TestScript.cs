@@ -17,5 +17,17 @@ public class TestScript : MonoBehaviour {
         {
             GetComponent<Animator>().SetBool("Fly", !GetComponent<Animator>().GetBool("Fly"));
         }
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            Debug.Log(GetComponent<Animator>());
+            GetComponent<Animator>().SetInteger("Attack", 1);
+            StartCoroutine(Attack1());
+        }
 	}
+
+    IEnumerator Attack1()
+    {
+        yield return new WaitForSeconds(.1f);
+        GetComponent<Animator>().SetInteger("Attack", 0);
+    }
 }
