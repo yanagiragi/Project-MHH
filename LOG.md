@@ -290,8 +290,53 @@
     
     > 火龍的走路動畫還有有點小問題 不過至少看起來會像走了
 
-    > root: ern??? > ern001_2 > NULL > COG
+    > root: ern??? > ern001_2 > NULL > COG, 要進Rig那邊手動選擇root motion
+
+    > blending 真的可以調得很漂亮
 
     > 火龍在地面上 root 322.451
     
     > 火龍在空中   root 824.201
+
+    > 火龍走路時目前沒有辦法直接切跑步 不過這個還好
+
+    > 目前完成火龍動畫：
+
+        直走 直衝 地上idle 空中idle 地上<->空中 空中大車輪 睡眠
+
+    <details>
+    <summary>Bugs require Fix:</summary>
+
+        LOD0:
+
+        > 跑步拔劍動畫怪怪的 (關掉Layer2 好像還是一樣)
+
+        > 跑步無法翻滾
+
+        > 應該喝藥水那邊有foot IK沒有處理好
+
+        > 盾的動畫
+
+        > 怪物動畫:
+
+            地上攻擊 空中攻擊 受傷動畫 倒地動畫
+
+        > 重構Haku的Animator
+
+        LOD1: 
+
+        > Idle 走路動畫 快速切換會有點跳格
+
+        > Combo 4 先丟著 需要修bug
+
+        > 受傷動畫 不過起來後rotation會有點變 此外起來時的動畫有點小位移 (應該是要調Blending)
+
+        > LOD1: Hit Blending 調整
+
+        > LOD1: 喝水動畫 (不過腳部有一些小瑕疵)
+
+        > LOD1: 走路動畫 -> 攻擊動畫 Fade會有點跳格
+
+        > LOD1: Haku的動畫再漂亮一點點
+
+    </details>
