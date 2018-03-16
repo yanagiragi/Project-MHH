@@ -17,17 +17,41 @@ public class TestScript : MonoBehaviour {
         {
             GetComponent<Animator>().SetBool("Fly", !GetComponent<Animator>().GetBool("Fly"));
         }
-        if(Input.GetKeyDown(KeyCode.N))
+
+        if (Input.GetKeyDown(KeyCode.N))
         {
             Debug.Log(GetComponent<Animator>());
             GetComponent<Animator>().SetInteger("Attack", 1);
             StartCoroutine(Attack1());
         }
-	}
+
+        KeyCode[] keyCodes = {
+             KeyCode.Alpha1,
+             KeyCode.Alpha2,
+             KeyCode.Alpha3,
+             KeyCode.Alpha4,
+             KeyCode.Alpha5,
+             KeyCode.Alpha6,
+             KeyCode.Alpha7,
+             KeyCode.Alpha8,
+             KeyCode.Alpha9
+         };
+
+        for (int i = 0; i < keyCodes.Length; ++i)
+        {
+            if (Input.GetKeyDown(keyCodes[i]))
+            {
+                Debug.Log(i + 1);
+                GetComponent<Animator>().SetInteger("Attack", i+1);
+                StartCoroutine(Attack1());
+            }
+        }
+        
+    }
 
     IEnumerator Attack1()
     {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.3f);
         GetComponent<Animator>().SetInteger("Attack", 0);
     }
 }
