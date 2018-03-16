@@ -25,6 +25,8 @@ public class TestScript : MonoBehaviour {
             StartCoroutine(Attack1());
         }
 
+        GetComponent<Animator>().SetFloat("InputH", Input.GetAxis("Horizontal"));
+
         KeyCode[] keyCodes = {
              KeyCode.Alpha1,
              KeyCode.Alpha2,
@@ -38,16 +40,25 @@ public class TestScript : MonoBehaviour {
          };
 
         bool switchHit = Input.GetKey(KeyCode.X);
+        bool switchAttack = Input.GetKey(KeyCode.Z);
 
         for (int i = 0; i < keyCodes.Length; ++i)
         {
             if (Input.GetKeyDown(keyCodes[i]))
             {
-                Debug.Log(i + 1);
                 if (switchHit)
                 {
                     GetComponent<Animator>().SetInteger("Hit", i + 1);
+                    Debug.Log(i + 1);
+
                     StartCoroutine(Hit1());
+                }
+                else if(switchAttack)
+                {
+                    Debug.Log(i + 11);
+
+                    GetComponent<Animator>().SetInteger("Attack", i + 11);
+                    StartCoroutine(Attack1());
                 }
                 else
                 {
