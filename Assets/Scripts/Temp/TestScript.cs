@@ -21,7 +21,7 @@ public class TestScript : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.N))
         {
             Debug.Log(GetComponent<Animator>());
-            GetComponent<Animator>().SetInteger("Attack", 1);
+            GetComponent<Animator>().SetBool("Run", !GetComponent<Animator>().GetBool("Run"));
             StartCoroutine(Attack1());
         }
 
@@ -37,16 +37,33 @@ public class TestScript : MonoBehaviour {
              KeyCode.Alpha9
          };
 
+        bool switchHit = Input.GetKey(KeyCode.X);
+
         for (int i = 0; i < keyCodes.Length; ++i)
         {
             if (Input.GetKeyDown(keyCodes[i]))
             {
                 Debug.Log(i + 1);
-                GetComponent<Animator>().SetInteger("Attack", i+1);
-                StartCoroutine(Attack1());
+                if (switchHit)
+                {
+                    GetComponent<Animator>().SetInteger("Hit", i + 1);
+                    StartCoroutine(Hit1());
+                }
+                else
+                {
+                    GetComponent<Animator>().SetInteger("Attack", i + 1);
+                    StartCoroutine(Attack1());
+                }
+                
             }
         }
         
+    }
+
+    IEnumerator Hit1()
+    {
+        yield return new WaitForSeconds(.3f);
+        GetComponent<Animator>().SetBool("Run", !GetComponent<Animator>().GetBool("Run"));
     }
 
     IEnumerator Attack1()

@@ -18,6 +18,8 @@
 
     > 用 Anim Speed 控制?
 
+    > 斷尾XDDD
+
 * 畫面
 
     > 一開始用就 Forward ?
@@ -340,3 +342,63 @@
         > LOD1: Haku的動畫再漂亮一點點
 
     </details>
+
+* Day 3:
+    
+    > AI 簡單構想
+
+        {
+            canAttack = checkAttackInterval() 
+            
+            // 延遲時序更新怪物的轉向?
+            if(canAttack && !isAttacking){ 
+                playerPos = GetPlayerPosition() 
+                canAttack = false; 
+                isAttacking = true 
+            } 
+            
+            if(isAttacking){ 
+                combo_int = getComboBaseOnRandom() 
+                preformComoHIt() 
+            }
+            
+            else{ 
+                if(isWalking) // update track player when walking
+                RotateRotationToPosition(playerPos)
+            }
+        }
+
+    > Lock Dependicies:
+
+        Sleep
+        Idle2
+        Idle3
+
+    > 火龍在Glide時的高度：
+
+        524.1
+
+    > 火龍 Hit
+
+        Hit = 0     Idle
+        Hit = 1     正面被攻擊小後退
+        Hit = 2     側躺倒地
+        Hit = 3     頭部被攻擊大後退
+        Hit = 4     Tackle到一半跌倒 // 80 frame 內要拉起來
+
+    > 火龍 Attack
+
+        -1-9 !0 都是地上的attack
+        
+        Hit = -1    就叫而已
+
+        Hit = 0     Idle
+        Hit = 1     
+        Hit = 2     
+        Hit = 3     
+        Hit = 4     
+        Hit = 5     
+        Hit = 6     
+        Hit = 7     
+        Hit = 8     
+        Hit = 9     
