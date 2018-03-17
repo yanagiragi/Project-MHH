@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -6743,11 +6743,11 @@ GameObject:
   - component: {fileID: 874108199}
   - component: {fileID: 874108197}
   - component: {fileID: 874108195}
-  - component: {fileID: 874108198}
   - component: {fileID: 874108202}
   - component: {fileID: 874108203}
   - component: {fileID: 874108200}
   - component: {fileID: 874108201}
+  - component: {fileID: 874108204}
   m_Layer: 0
   m_Name: Haku_red
   m_TagString: Player
@@ -6776,7 +6776,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 874108194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.037, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 476654706}
@@ -7310,39 +7310,6 @@ MonoBehaviour:
   editorViewMorphBits: 15
   editorViewRigidBodies: 0
   editorViewMorphNameType: 0
---- !u!114 &874108198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 874108194}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5648fd63de3ff1048909c3d3b16ec70f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  intervalBetweenAttacks:
-  - 0
-  - 0.3
-  - 1
-  - 1.5
-  - 0.1
-  - 1.6
-  scaleFactor: {x: 3, y: 1.5, z: 1.8, w: 1.8}
-  rollScaleFactor: {x: 3, y: 1.5, z: 1.8, w: 1.8}
-  runScale: 2
-  inputH: 0
-  inputV: 0
-  canWalk: 1
-  isWalk: 0
-  isRun: 0
-  canRoll: 1
-  isRoll: 0
-  canStartAttackFlag: 1
-  startAttackFlag: 0
-  attackNum: 0
-  innerTime: 0
-  isHit: 0
 --- !u!95 &874108199
 Animator:
   serializedVersion: 3
@@ -7353,7 +7320,7 @@ Animator:
   m_GameObject: {fileID: 874108194}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: d6ae194b462cb804da0f3115aefe9461, type: 3}
-  m_Controller: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
+  m_Controller: {fileID: 9100000, guid: fd185b634f26b5e43af78f5743ffc504, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -7419,6 +7386,37 @@ CapsuleCollider:
   m_Height: 1.79
   m_Direction: 1
   m_Center: {x: 0, y: 0.86, z: 0}
+--- !u!114 &874108204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 874108194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d628dd9e4df357d40a5244b05e27b912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intervalBetweenAttacks:
+  - {x: -1, y: -1, z: -1}
+  - {x: 0.63, y: 1, z: -1}
+  - {x: 0.9, y: 1.2, z: -1}
+  - {x: 0.5, y: 1, z: -1}
+  scaleFactor: {x: 3, y: 1.5, z: 1.8, w: 1.8}
+  rollScaleFactor: {x: 3, y: 1.5, z: 1.8, w: 1.8}
+  runScale: 2
+  inputH: 0
+  inputV: 0
+  canWalk: 1
+  isWalk: 1
+  isRun: 0
+  canRoll: 1
+  isRoll: 0
+  canStartAttackFlag: 1
+  startAttackFlag: 0
+  attackNum: 0
+  innerTime: 0
+  isHit: 0
 --- !u!1 &877520504
 GameObject:
   m_ObjectHideFlags: 0
@@ -16803,7 +16801,7 @@ Prefab:
     - target: {fileID: 9500000, guid: b14c8b433286f8945a20c62c4e99a788, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 7bf3dcadc79b80541bf9b3eac79ebf3f, type: 2}
+      objectReference: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
     - target: {fileID: 100390, guid: b14c8b433286f8945a20c62c4e99a788, type: 3}
       propertyPath: m_IsActive
       value: 0
