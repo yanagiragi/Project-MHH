@@ -424,3 +424,91 @@
         Hit = 11    空中左腳攻擊
         Hit = 12    空中右腳攻擊
         Hit = 13    下咬
+
+    <details>
+    <summary>Bugs require Fix:</summary>
+
+        LOD0:
+
+        > 跑步拔劍動畫怪怪的 (關掉Layer2 好像還是一樣)
+
+        > 跑步無法翻滾
+
+        > 應該喝藥水那邊有foot IK沒有處理好
+
+        > 盾的動畫
+
+        > 重構Haku的Animator
+
+        LOD1: 
+
+        > Idle 走路動畫 快速切換會有點跳格
+
+        > Combo 4 先丟著 需要修bug
+
+        > 受傷動畫 不過起來後rotation會有點變 此外起來時的動畫有點小位移 (應該是要調Blending)
+
+        > LOD1: Hit Blending 調整
+
+        > LOD1: 喝水動畫 (不過腳部有一些小瑕疵)
+
+        > LOD1: 走路動畫 -> 攻擊動畫 Fade會有點跳格
+
+        > LOD1: Haku的動畫再漂亮一點點
+
+    </details>
+
+* Day 4
+
+    > 用 SubStateMachine + UnityStandardAssets裡面的範例把Haku的Animator重購了一次
+
+    > 第三階層武器 結束有點卡卡的
+
+    > 砍玩馬上跑沒有Blending
+
+    > 砍 <-> 移動的 錯位已經被調整到比較可以接受了, 但是還有改善空間
+
+    > 用 startAttackFlag & canStartAttackFlag 暫時Disable 移動控制，不過在結尾會有很小的機會可以動做完直接轉 (不過跟走路的直接轉差不多了)
+
+    > 跑步時後手部可以多一些動畫 (額外的State)
+
+    > 考慮一下要不要disable run & 喝藥時Disable Run
+
+    > DrawSword2 動畫 Hit 感覺有點怪 不過看起來要觸發有點難
+
+    > 現在只會往後倒...不確定是不是個問題
+
+    <details>
+    <summary>Bugs require Fix:</summary>
+
+        LOD0:
+
+            暫無
+
+        LOD1: 
+
+        > 盾的動畫 // 非絕對必要
+
+        > 走路動畫 位置等等可以Blend得更漂亮
+
+        > 跑步會有點錯位
+
+        > 攻擊完會有點錯位
+
+        > 因為攻擊直接關掉Layer2部分會有錯位的感覺
+
+        > Combo 4 先丟著 需要修bug
+
+        > 第三階層武器 結束有點卡卡的
+
+        > 砍玩馬上跑沒有Blending
+
+        > 砍 <-> 移動的 錯位已經被調整到比較可以接受了, 但是還有改善空間
+
+        > 用 startAttackFlag & canStartAttackFlag 暫時Disable 移動控制，不過在結尾會有很小的機會可以動做完直接轉 (不過跟走路的直接轉差不多了)
+
+        > 跑步時後手部可以多一些動畫 (額外的State)
+
+        > 要不要disable run & 喝藥時Disable Run
+
+    </details>
