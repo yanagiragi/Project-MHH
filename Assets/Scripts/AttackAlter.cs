@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class AttackAlter : MonoBehaviour {
 
-    [SerializeField]
-    private bool isDebug;
+    public bool isDebug;
 
     [Header("Control")]
 
@@ -36,8 +35,7 @@ public class AttackAlter : MonoBehaviour {
     public bool canStartAttackFlag = true;
     //[SerializeField]
     public bool startAttackFlag = false;
-    [SerializeField]
-    private int attackNum = 0;
+    public int attackNum = 0;
     [SerializeField]
     private float innerTime;
 
