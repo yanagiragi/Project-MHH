@@ -12,7 +12,15 @@ public class CollideMonster : MonoBehaviour {
     public bool canHit;
     public float interval;
     public GameObject Prefab;
-    
+
+    string[] monsterHitboxTags =
+    {
+        "TailHitBox",
+        "HeadHitBox",
+        "BodyHitBox",
+        "LegHitBox",
+    };
+
     // For Delaying TriggerEnter when first combo exactly very close to collider
     public bool specialFlag = false;
 
@@ -64,16 +72,27 @@ public class CollideMonster : MonoBehaviour {
         //    StartCoroutine(DelayHit());
         //}
 
-        if (canHit && attackInstance.startAttackFlag && other.gameObject.CompareTag("TailHitBox"))
+        int matchTagIndex = 0;
+        foreach(string str in monsterHitboxTags)
+        {
+            if (other.gameObject.CompareTag(str))
+            {
+                break;
+            }
+            ++matchTagIndex;
+        }
+
+        if (canHit && attackInstance.startAttackFlag && matchTagIndex < monsterHitboxTags.Length)
         {
             canHit = false;
             StartCoroutine(coolDownTriggerDetection());
                         
             Vector3 hitPos = other.ClosestPointOnBounds(transform.position);
 
-            if(isDebug)
-            {
-                Debug.Log("1");
+            Debug.Log("Hit " + monsterHitboxTags[matchTagIndex]);
+
+            if (isDebug)
+            {   
                 GameObject g = Instantiate(Prefab, hitPos, Quaternion.identity, other.gameObject.transform.parent);
                 //g.transform.localScale = new Vector3(1f / g.transform.parent.lossyScale.x, 1f / g.transform.parent.lossyScale.y, 1f / g.transform.parent.lossyScale.z);
                 g.transform.localScale = Vector3.one * 100f;
