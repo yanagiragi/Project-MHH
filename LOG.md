@@ -561,6 +561,21 @@
         8           8               11
         9           9               13.5
 
+    > Grounded Update Threshold (For Now)
+
+    65  99  100
+
+    > 有看過空間Atk時 ArrayOutofBound (不過應該是因為Unity的Bug沒有更新變數的關係)
+
+    > 空中攻擊後的delay (AttackThreshold.y)
+
+        第幾項     對應哪個攻擊      Thres
+        0           11              3
+        1           12              3
+        2           13              5
+        3           14(大吼)          5
+       
+
     先把怪物的AI大致上寫好 -> 
     寫好後就可以測試能不能讓怪物攻擊到我 ->
     讓你攻擊怪物有辦法倒地 + 控制傷害量 ->

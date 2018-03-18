@@ -6,11 +6,10 @@ public class MonsterAI : MonoBehaviour {
 
     public Animator rathianAnim;
     public Transform Player;
-    public float StopDistance;
-    public float FarDistance;
-    public float Speed;
-    public float RunSpeed;
+
+
     public bool isRun;
+    public bool isHit;
 
     public enum state{
         MOVE,
@@ -26,53 +25,83 @@ public class MonsterAI : MonoBehaviour {
 
     public Vector2 RandomInterval;
 
-    [Header("數字越低，代表越有可能在走路後攻擊")]
-    public float updateIntervalAfterMove;
-    [Header("數字越低，代表越有可能在距離遠時選擇Run")]
-    public float updateIntervalAfterFarDistance;
+    [Header("=== Grounded ===")]
 
-    // 0 < 1 < 2
-    // representing move atk fly
-    [Header("Move Atk Fly")]
-    public Vector3 groundedUpdateThreshold;
+        public float StopDistance;
+        public float FarDistance;
+        public float Speed;
+        public float RunSpeed;
 
-    // 0 < 1 < 2
-    // Landing, move, atk
-    [Header("Landing Move Atk")]
-    public Vector3 AirUpdateThreshold;
+        [Header("數字越低，代表越有可能在走路後攻擊")]
+        public float updateIntervalAfterMove;
+        [Header("數字越低，代表越有可能在距離遠時選擇Run")]
+        public float updateIntervalAfterFarDistance;
 
-    int[] attackType = { -1, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        // 0 < 1 < 2
+        // representing move atk fly
+        [Header("Move Atk Fly")]
+        public Vector3 groundedUpdateThreshold;
 
-    [Header("ATK -1, 1 ~ 9")]
-    public Vector2[] attackThreshold;
+        int[] attackType = { -1, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-    public bool isHit;
+        [Header("ATK -1, 1 ~ 9")]
+        public Vector2[] attackThreshold;
 
-    [Header("SerializeField")]
+        [SerializeField]
+        bool canUpdateRun;
 
-    [SerializeField]
-    List<state> stateList;
+    [Header("=== On-the-Air ===")]
 
-    [SerializeField]
-    bool canUpdate;
+        public float StopDistanceAir;
+        public float FarDistanceAir;
+        public float SpeedAir;
+        public float RunSpeedAir;
 
-    [SerializeField]
-    float sleepInterval;
+        [Header("數字越低，代表越有可能在走路後攻擊")]
+        public float updateIntervalAfterMoveAir;
+        [Header("數字越低，代表越有可能在距離遠時選擇Run")]
+        public float updateIntervalAfterFarDistanceAir;
 
-    [SerializeField]
-    bool grounded;
+        // 0 < 1 < 2
+        // Landing, move, atk
+        [Header("Landing Move Atk")]
+        public Vector3 AirUpdateThreshold;
 
-    [SerializeField]
-    bool startAttack;
+        int[] attackTypeAir = { 11, 12, 13, 14};
 
-    [SerializeField]
-    bool canUpdateRun;
+        [Header("ATK 11 ~ 14")]
+        public Vector2[] attackThresholdAir;
 
-    [SerializeField]
-    float nowDistance;
+        [SerializeField]
+        bool canUpdateSlide;
 
-    [SerializeField]
-    int previousAtk;
+    [Header(" === SerializeField ===")]
+    
+        [SerializeField]
+        List<state> stateList;
+
+        [SerializeField]
+        bool canUpdate;
+
+        [SerializeField]
+        float sleepInterval;
+
+        [SerializeField]
+        bool grounded;
+
+        [SerializeField]
+        bool startAttack;
+
+        [SerializeField]
+        bool canUpdateFly;
+
+
+
+        [SerializeField]
+        float nowDistance;
+
+        [SerializeField]
+        int previousAtk;
     
     Quaternion rotateGoal;
     Vector3 positionGoal;
@@ -81,7 +110,11 @@ public class MonsterAI : MonoBehaviour {
     {
         canUpdate = true;
 
+        canUpdateFly = true;
+
         canUpdateRun = true;
+
+        canUpdateSlide = true;
 
         startAttack = false;
 
@@ -94,6 +127,7 @@ public class MonsterAI : MonoBehaviour {
 
         previousAtk = -1;
 
+        Time.timeScale = 2.2f;
         // FLY only available after hp less than 75%
     }
 	
@@ -104,20 +138,16 @@ public class MonsterAI : MonoBehaviour {
         {
             canUpdate = false;
 
-            //sleepInterval = Random.Range(updateInterval.x, updateInterval.y);
-
-            //StartCoroutine(UpdateUpdateFlag());            
-
             #region chooseBehaviour
             float min = RandomInterval.x;
             float max = RandomInterval.y;
 
             float index = Random.Range(min, max);
 
-            Debug.Log(index);
-
             if (grounded)
             {
+                #region grounded_Action_Selection
+
                 previousState = currentState;
 
                 if (Vector3.Distance(Player.transform.position, transform.position) >= FarDistance && index > updateIntervalAfterFarDistance)
@@ -146,7 +176,47 @@ public class MonsterAI : MonoBehaviour {
                 {
                     currentState = state.FLY;
                 }
+                #endregion
 
+            }
+            else
+            {
+                #region Air_Action_Selection
+
+                previousState = currentState;
+
+                if (Vector3.Distance(Player.transform.position, transform.position) >= FarDistanceAir && index > updateIntervalAfterFarDistanceAir)
+                {
+                    // Far From player, should run into player instead
+                    Debug.Log("MOVE due to far distance");
+                    currentState = state.MOVE;
+                }
+                else if (currentState == state.MOVE && Vector3.Distance(Player.transform.position, transform.position) <= StopDistanceAir && index > updateIntervalAfterMoveAir)
+                {
+                    // just after moved, lower posibility to move again, since player may near the monster
+                    Debug.Log("ATK due to prev MOVE");
+                    currentState = state.ATK;
+                }
+                else if (index < AirUpdateThreshold[0])
+                {
+                    currentState = state.FLY;
+                }
+
+                else if (index < AirUpdateThreshold[1])
+                {
+                    currentState = state.MOVE;
+                }
+                else
+                {
+                    currentState = state.ATK;
+                }
+
+                if(previousState == state.FLY)
+                {
+                    currentState = state.ATK;
+                }
+
+                #endregion
             }
 
             Debug.Log("NState = " + currentState);
@@ -174,10 +244,215 @@ public class MonsterAI : MonoBehaviour {
                         break;
                 }
             }
+            else
+            {
+                switch (currentState)
+                {
+                    case state.MOVE:
+                        MoveAir();
+                        break;
+                    case state.ATK:
+                        AttackPlayerAir();
+                        break;
+                    case state.FLY:
+                        if(canUpdateFly)
+                            Landing();
+                        break;
+                    default:
+                        Debug.LogError("No Such State");
+                        break;
+                }
+            }
         }
+
+        // Debug.Log(Vector3.Distance(transform.position, Player.transform.position));
+    }
+
+    IEnumerator delayStartSlide()
+    {
+        float runSpeed = RunSpeedAir;
+        float speed = SpeedAir;
+
+        // limit Speed Before Start Sliding
+        SpeedAir = RunSpeedAir = 0.0f;
         
+        isRun = true;
 
+        while (rathianAnim.GetCurrentAnimatorStateInfo(0).IsName("StartSlide"))
+        {
+            yield return null;
+        }
 
+        yield return new WaitForSeconds(6.5f);
+
+        RunSpeedAir = runSpeed;
+        SpeedAir = speed;
+    }
+
+    void MoveAir()
+    {
+        rotateGoal = getFacingPlayerRotation();
+        positionGoal.x = Player.position.x;
+        positionGoal.y = transform.position.y;
+        positionGoal.z = Player.position.z;
+
+        nowDistance = Vector3.Distance(positionGoal, transform.position);
+
+        if (canUpdateSlide)
+        {
+            // update goal           
+
+            // if so, preform run anim until next tick
+            if(nowDistance > FarDistance || nowDistance > FarDistance)
+            {
+                StartCoroutine(delayStartSlide());
+            }
+
+            canUpdateSlide = false;
+
+            nowDistance = Vector3.Distance(positionGoal, transform.position);
+
+        }
+
+        // Start Rotate
+        // Can't use transform.LookAt since there is an offset between root and animations, Use Below instead
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotateGoal, Time.deltaTime);
+
+        // Start Moving
+        nowDistance = Vector3.Distance(positionGoal, transform.position);
+
+   
+        if (nowDistance > StopDistanceAir)
+        {
+            transform.position = Vector3.Lerp(transform.position, positionGoal, Time.deltaTime * (isRun ? RunSpeedAir : SpeedAir));
+
+            if (isRun)
+            {
+                rathianAnim.SetBool("Run", true);
+            }
+            else
+            {
+                rathianAnim.SetBool("Run", false);
+            }
+        }
+        else
+        {
+            canUpdateSlide = true;
+
+            canUpdate = true;
+
+            isRun = false;
+
+            rathianAnim.SetBool("Run", false);
+        }
+
+    }
+
+    void AttackPlayerAir()
+    {
+        if (!startAttack)
+        {
+            startAttack = true;
+
+            // start Attack
+            float atkIndex = Random.Range(RandomInterval.x, RandomInterval.y);
+
+            int i;
+            for (i = 0; i < attackThresholdAir.Length; ++i)
+            {
+                if (atkIndex < attackThresholdAir[i].x)
+                {
+                    break;
+                }
+            }
+
+            if (i == previousAtk)
+            {
+                if (i != attackThresholdAir.Length - 1)
+                    ++i;
+                else
+                    i = 0;
+            }
+
+            previousAtk = i;
+
+            Debug.Log(i + ", " + attackThresholdAir.Length);
+
+            StartCoroutine(delayUpdateCanAttack(attackThresholdAir[i].y));
+
+            Debug.Log("Do Attack " + attackTypeAir[i]);
+
+            StartCoroutine(delayPullUpAtk(attackTypeAir[i]));
+
+            StartCoroutine(delaySetAnimAttackToZero());
+        }
+    }
+
+    IEnumerator delayRestoreCanUpdateAfterFly()
+    {
+        yield return new WaitForSeconds(6f);
+
+        canUpdate = true;
+        canUpdateFly = true;
+        Debug.Log("Pull Up Fly Flags");
+        //canUpdateFly = true;
+        //grounded = false;
+    }
+
+    IEnumerator delayRestoreFlagsAfterLand()
+    {
+        yield return new WaitForSeconds(6f);
+
+        Debug.Log("Pull Up Land Flags");
+        canUpdateFly = true;
+        // grounded = true;
+        canUpdate = true;
+       // canUpdateFly = true;
+    }
+    void flyUp()
+    {
+        if (grounded && canUpdateFly)
+        {
+            Debug.Log("FLY");
+
+            isRun = false;
+
+            //canUpdate = true;
+            //canUpdateFly = true;
+            grounded = false;
+
+            canUpdate = false;
+
+            canUpdateFly = false;
+
+            rathianAnim.SetBool("Walk", false);
+            rathianAnim.SetBool("Run", false);
+            rathianAnim.SetInteger("Attack", 0);
+            rathianAnim.SetBool("Fly", true);
+
+            StartCoroutine(delayRestoreCanUpdateAfterFly());
+        }
+
+    }
+
+    void Landing()
+    {
+        if (!grounded && canUpdateFly)
+        {
+            Debug.Log("LAND");
+
+            isRun = false;
+            grounded = true;
+            canUpdate = false;
+            canUpdateFly = false;
+
+            rathianAnim.SetBool("Walk", false);
+            rathianAnim.SetBool("Run", false);
+            rathianAnim.SetInteger("Attack", 0);
+            rathianAnim.SetBool("Fly", false);
+
+            StartCoroutine(delayRestoreFlagsAfterLand());
+        }
     }
 
     IEnumerator UpdateUpdateFlag()
@@ -293,18 +568,13 @@ public class MonsterAI : MonoBehaviour {
             StartCoroutine(delaySetAnimAttackToZero());
         }
 
-    }
-
-    void flyUp()
-    {
-        Debug.Log("FLY");
-    }
+    }   
 
     void Move()
     {
         rotateGoal = getFacingPlayerRotation();
         positionGoal.x = Player.position.x;
-        positionGoal.y = Player.position.y;
+        positionGoal.y = transform.position.y;
         positionGoal.z = Player.position.z;
 
         nowDistance = Vector3.Distance(positionGoal, transform.position);
