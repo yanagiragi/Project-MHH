@@ -7,6 +7,7 @@ public class MonsterAI : MonoBehaviour {
     public Animator rathianAnim;
     public Transform Player;
 
+    public bool isDebug;
 
     public bool isRun;
     public bool isHit;
@@ -95,8 +96,6 @@ public class MonsterAI : MonoBehaviour {
         [SerializeField]
         bool canUpdateFly;
 
-
-
         [SerializeField]
         float nowDistance;
 
@@ -127,8 +126,6 @@ public class MonsterAI : MonoBehaviour {
 
         previousAtk = -1;
 
-        Time.timeScale = 2.2f;
-        // FLY only available after hp less than 75%
     }
 	
 	void Update ()
@@ -219,7 +216,8 @@ public class MonsterAI : MonoBehaviour {
                 #endregion
             }
 
-            Debug.Log("NState = " + currentState);
+            if(isDebug)
+                Debug.Log("NState = " + currentState);
 
             #endregion
         }
@@ -283,7 +281,7 @@ public class MonsterAI : MonoBehaviour {
             yield return null;
         }
 
-        yield return new WaitForSeconds(6.5f);
+        yield return new WaitForSeconds(5.5f);
 
         RunSpeedAir = runSpeed;
         SpeedAir = speed;
@@ -329,6 +327,12 @@ public class MonsterAI : MonoBehaviour {
             if (isRun)
             {
                 rathianAnim.SetBool("Run", true);
+                //Vector3 angles = rotateGoal.eulerAngles;
+                //angles = angles.normalized;
+
+                //Debug.Log(angles);
+
+                //rathianAnim.SetFloat("InputH", angles.y);
             }
             else
             {
@@ -376,11 +380,13 @@ public class MonsterAI : MonoBehaviour {
 
             previousAtk = i;
 
-            Debug.Log(i + ", " + attackThresholdAir.Length);
+            if (isDebug)
+                Debug.Log(i + ", " + attackThresholdAir.Length);
 
             StartCoroutine(delayUpdateCanAttack(attackThresholdAir[i].y));
 
-            Debug.Log("Do Attack " + attackTypeAir[i]);
+            if (isDebug)
+                Debug.Log("Do Attack " + attackTypeAir[i]);
 
             StartCoroutine(delayPullUpAtk(attackTypeAir[i]));
 
@@ -395,8 +401,6 @@ public class MonsterAI : MonoBehaviour {
         canUpdate = true;
         canUpdateFly = true;
         Debug.Log("Pull Up Fly Flags");
-        //canUpdateFly = true;
-        //grounded = false;
     }
 
     IEnumerator delayRestoreFlagsAfterLand()
@@ -405,24 +409,19 @@ public class MonsterAI : MonoBehaviour {
 
         Debug.Log("Pull Up Land Flags");
         canUpdateFly = true;
-        // grounded = true;
         canUpdate = true;
-       // canUpdateFly = true;
     }
+
     void flyUp()
     {
         if (grounded && canUpdateFly)
         {
-            Debug.Log("FLY");
+            if (isDebug)
+                Debug.Log("FLY");
 
             isRun = false;
-
-            //canUpdate = true;
-            //canUpdateFly = true;
             grounded = false;
-
             canUpdate = false;
-
             canUpdateFly = false;
 
             rathianAnim.SetBool("Walk", false);
@@ -439,7 +438,8 @@ public class MonsterAI : MonoBehaviour {
     {
         if (!grounded && canUpdateFly)
         {
-            Debug.Log("LAND");
+            if (isDebug)
+                Debug.Log("LAND");
 
             isRun = false;
             grounded = true;
@@ -470,9 +470,7 @@ public class MonsterAI : MonoBehaviour {
         while(innerTime < 3f)
         {
             innerTime += Time.deltaTime;
-
-            //Debug.Log(innerTime);
-
+            
             Quaternion goal = getFacingPlayerRotation();
 
             transform.rotation = Quaternion.Slerp(transform.rotation, goal, Time.deltaTime);
@@ -480,8 +478,9 @@ public class MonsterAI : MonoBehaviour {
             yield return null;
         }
 
-        //yield return new WaitForSeconds(delayDueToWalk);
-        Debug.Log("Pull Up!");
+        if (isDebug)
+            Debug.Log("Pull Up!");
+
         rathianAnim.SetInteger("Attack", value);
     }
 
@@ -528,7 +527,8 @@ public class MonsterAI : MonoBehaviour {
     {
         if(!startAttack)
         {
-            Debug.Log("ATK");
+            if (isDebug)
+                Debug.Log("ATK");
 
             // clean animation flags
             StartCoroutine(clearAnimRunFlag());
@@ -559,11 +559,10 @@ public class MonsterAI : MonoBehaviour {
 
             StartCoroutine(delayUpdateCanAttack(attackThreshold[i].y));
 
-            Debug.Log("Do Attack " + attackType[i]);
+            if (isDebug)
+                Debug.Log("Do Attack " + attackType[i]);
 
             StartCoroutine(delayPullUpAtk(attackType[i]));
-
-            //rathianAnim.SetInteger("Attack", attackType[i]);
 
             StartCoroutine(delaySetAnimAttackToZero());
         }
