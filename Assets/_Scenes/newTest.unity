@@ -3635,13 +3635,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rathianAnim: {fileID: 406314387}
   Player: {fileID: 874108196}
-  StopDistance: 7
-  FarDistance: 30
+  StopDistance: 8.5
+  FarDistance: 17
   Speed: 0.01
   RunSpeed: 0.015
   isRun: 0
-  canUpdateGoal: 0
+  currentState: 3
+  previousState: 3
+  updateInterval: {x: 5, y: 10}
+  RandomInterval: {x: 1, y: 100}
+  updateIntervalAfterMove: 10
+  updateIntervalAfterFarDistance: 10
+  groundedUpdateThreshold: {x: 65, y: 99, z: 100}
+  AirUpdateThreshold: {x: 0, y: 0, z: 0}
+  attackThreshold:
+  - {x: 10, y: 5}
+  - {x: 20, y: 6.5}
+  - {x: 30, y: 7}
+  - {x: 40, y: 4}
+  - {x: 50, y: 4}
+  - {x: 60, y: 5}
+  - {x: 70, y: 4}
+  - {x: 100, y: 14}
+  - {x: 0, y: 11}
+  - {x: 0, y: 13.5}
+  isHit: 0
+  stateList: 
+  canUpdate: 0
+  sleepInterval: 0
+  grounded: 0
+  startAttack: 0
+  canUpdateRun: 0
   nowDistance: 0
+  delayDueToWalk: 0.5
 --- !u!1 &420648661
 GameObject:
   m_ObjectHideFlags: 0
@@ -7509,7 +7535,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400030, guid: 452705b14873f3c4e91eca003157d693, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.9
+      value: 39.3
       objectReference: {fileID: 0}
     - target: {fileID: 400030, guid: 452705b14873f3c4e91eca003157d693, type: 3}
       propertyPath: m_LocalRotation.x
