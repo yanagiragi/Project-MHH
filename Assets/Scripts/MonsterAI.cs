@@ -392,7 +392,7 @@ public class MonsterAI : MonoBehaviour {
 
             StartCoroutine(delayPullUpAtk(attackTypeAir[i]));
 
-            StartCoroutine(delaySetAnimAttackToZero(-1));
+            StartCoroutine(delaySetAnimAttackToZero(i + 10));
         }
     }
 
@@ -483,6 +483,7 @@ public class MonsterAI : MonoBehaviour {
         if (isDebug)
             Debug.Log("Pull Up!");
 
+        atkColliderInstance.UpdateCollider(-1);
         rathianAnim.SetInteger("Attack", value);
     }
 

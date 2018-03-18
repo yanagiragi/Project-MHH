@@ -33,7 +33,7 @@ public class AttackCollider : MonoBehaviour {
         colliderList.Add(Attack7TackleFailedCollider); // 11
         colliderList.Add(Attack7TackleFailedCollider); // 12
         colliderList.Add(Attack7TackleFailedCollider); // 13
-        colliderList.Add(placeHolder); // 14
+        colliderList.Add(Attack7TackleFailedCollider); // 14        
     }
 	
 	public void UpdateCollider (int index)
