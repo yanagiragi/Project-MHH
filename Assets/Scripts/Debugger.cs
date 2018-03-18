@@ -12,25 +12,36 @@ public class Debugger : MonoBehaviour {
     public GameObject[] Axes;
 
     public bool isDebug = false;
+    public bool showMonsterHitBoxOnly = false;
 
-	void Start () {
+    void Start () {
 		
 	}
 
     private void Trigger()
     {
+        if(showMonsterHitBoxOnly)
+        {
+            isDebug = false;
+        }
+
         attackInstance.isDebug = isDebug;
         collidemMonsterInstance.isDebug = isDebug;
         foreach (GameObject g in MonsterHixBox)
         {
             g.GetComponent<Renderer>().enabled = isDebug;
+
+            if (g.CompareTag("MonsterHitBox") && showMonsterHitBoxOnly)
+            {
+                g.GetComponent<Renderer>().enabled = showMonsterHitBoxOnly;
+            }
         }
         foreach (GameObject g in Axes)
         {
             Renderer[] r = g.GetComponentsInChildren<Renderer>();
             foreach (Renderer gg in r)
             {
-                gg.enabled = isDebug;
+                gg.enabled = isDebug;                
             }
         }
     }

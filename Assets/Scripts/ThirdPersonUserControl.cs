@@ -71,7 +71,7 @@ using UnityStandardAssets.CrossPlatformInput;
             }
 #if !MOBILE_INPUT
 			// walk speed multiplier
-	        if (!Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
+	        //if (!Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
 #endif
 
             // pass all parameters to the character control script

@@ -266,7 +266,7 @@ public class AttackAlter : MonoBehaviour {
         else if (atk == 2)
         {
             float firstTime = .2f;
-            float totalTime = .3f;
+            //float totalTime = .3f;
 
             yield return new WaitForSeconds(firstTime);
             canStartAttackFlag = true;
@@ -276,7 +276,7 @@ public class AttackAlter : MonoBehaviour {
         }
         else if (atk == 1)
         {
-            float firstTime = .1f;
+            //float firstTime = .1f;
             float totalTime = .5f;
 
             yield return new WaitForSeconds(totalTime);

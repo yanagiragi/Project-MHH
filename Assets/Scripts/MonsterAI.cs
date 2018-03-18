@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MonsterAI : MonoBehaviour {
 
+    public AttackCollider atkColliderInstance;
     public Animator rathianAnim;
     public Transform Player;
 
@@ -90,8 +91,7 @@ public class MonsterAI : MonoBehaviour {
         [SerializeField]
         bool grounded;
 
-        [SerializeField]
-        bool startAttack;
+        public bool startAttack;
 
         [SerializeField]
         bool canUpdateFly;
@@ -150,13 +150,15 @@ public class MonsterAI : MonoBehaviour {
                 if (Vector3.Distance(Player.transform.position, transform.position) >= FarDistance && index > updateIntervalAfterFarDistance)
                 {
                     // Far From player, should run into player instead
-                    Debug.Log("MOVE due to far distance");
+                    if (isDebug)
+                        Debug.Log("MOVE due to far distance");
                     currentState = state.MOVE;
                 }
                 else if (currentState == state.MOVE && Vector3.Distance(Player.transform.position, transform.position) <= StopDistance && index > updateIntervalAfterMove)
                 {
                     // just after moved, lower posibility to move again, since player may near the monster
-                    Debug.Log("ATK due to prev MOVE");
+                    if(isDebug)
+                        Debug.Log("ATK due to prev MOVE");
                     currentState = state.ATK;
                 }
               
@@ -357,7 +359,7 @@ public class MonsterAI : MonoBehaviour {
         if (!startAttack)
         {
             startAttack = true;
-
+            
             // start Attack
             float atkIndex = Random.Range(RandomInterval.x, RandomInterval.y);
 
@@ -390,7 +392,7 @@ public class MonsterAI : MonoBehaviour {
 
             StartCoroutine(delayPullUpAtk(attackTypeAir[i]));
 
-            StartCoroutine(delaySetAnimAttackToZero());
+            StartCoroutine(delaySetAnimAttackToZero(-1));
         }
     }
 
@@ -491,11 +493,16 @@ public class MonsterAI : MonoBehaviour {
         startAttack = false;
 
         canUpdate = true;
+
+        // Restore Collider State
+        atkColliderInstance.UpdateCollider(-1);
     }
 
-    IEnumerator delaySetAnimAttackToZero()
+    IEnumerator delaySetAnimAttackToZero(int index)
     {
         yield return new WaitForSeconds(.3f + 3f);
+
+        atkColliderInstance.UpdateCollider(index);
 
         rathianAnim.SetInteger("Attack", 0);
     }
@@ -535,6 +542,7 @@ public class MonsterAI : MonoBehaviour {
 
             startAttack = true;            
             
+
             // start Attack
             float atkIndex = Random.Range(RandomInterval.x, RandomInterval.y);
 
@@ -564,7 +572,7 @@ public class MonsterAI : MonoBehaviour {
 
             StartCoroutine(delayPullUpAtk(attackType[i]));
 
-            StartCoroutine(delaySetAnimAttackToZero());
+            StartCoroutine(delaySetAnimAttackToZero(i));
         }
 
     }   

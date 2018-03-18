@@ -10,6 +10,7 @@ TagManager:
   - HeadHitBox
   - LegHitBox
   - BodyHitBox
+  - MonsterHitBox
   layers:
   - Default
   - TransparentFX
