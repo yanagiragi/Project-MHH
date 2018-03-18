@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Player0316
+  m_Name: OldAnimatorBefore0316_1
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: flag
@@ -3563,82 +3563,63 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 1102845548064972420}
-    m_Position: {x: 420, y: -432, z: 0}
-  m_ChildStateMachines:
+    m_State: {fileID: 1102320480949984632}
+    m_Position: {x: 768, y: 168, z: 0}
   - serializedVersion: 1
-    m_StateMachine: {fileID: 1107298229318873470}
-    m_Position: {x: 792, y: -384, z: 0}
+    m_State: {fileID: 1102964527918894944}
+    m_Position: {x: 648, y: -444, z: 0}
   - serializedVersion: 1
-    m_StateMachine: {fileID: 1107961017149371488}
-    m_Position: {x: 252, y: -324, z: 0}
+    m_State: {fileID: 1102843046582378830}
+    m_Position: {x: 948, y: -384, z: 0}
   - serializedVersion: 1
-    m_StateMachine: {fileID: 1107425066810751964}
-    m_Position: {x: 456, y: -204, z: 0}
+    m_State: {fileID: 1102505986416252064}
+    m_Position: {x: 924, y: -192, z: 0}
   - serializedVersion: 1
-    m_StateMachine: {fileID: 1107042944189008192}
-    m_Position: {x: 540, y: -372, z: 0}
-  m_AnyStateTransitions: []
-  m_EntryTransitions: []
-  m_StateMachineTransitions: {}
-  m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 180, y: -204, z: 0}
-  m_EntryPosition: {x: 180, y: -252, z: 0}
-  m_ExitPosition: {x: -48, y: -48, z: 0}
-  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102165130844378004}
---- !u!1107 &1107042944189008192
-AnimatorStateMachine:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Draw&Sheath
-  m_ChildStates: []
-  m_ChildStateMachines:
-  - serializedVersion: 1
-    m_StateMachine: {fileID: 1107073247247563220}
-    m_Position: {x: 0, y: 0, z: 0}
-  - serializedVersion: 1
-    m_StateMachine: {fileID: 1107770740361146628}
-    m_Position: {x: 0, y: 0, z: 0}
-  m_AnyStateTransitions: []
-  m_EntryTransitions: []
-  m_StateMachineTransitions:
-  - first: {fileID: 1107073247247563220}
-    second: []
-  - first: {fileID: 1107770740361146628}
-    second: []
-  m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
-  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102733966582217146}
---- !u!1107 &1107073247247563220
-AnimatorStateMachine:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SheathSword
-  m_ChildStates:
+    m_State: {fileID: 1102165130844378004}
+    m_Position: {x: 228, y: -336, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102733966582217146}
-    m_Position: {x: 0, y: 0, z: 0}
+    m_Position: {x: 744, y: -288, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102128116678714062}
-    m_Position: {x: 0, y: 0, z: 0}
+    m_Position: {x: 492, y: -300, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102230602829579306}
+    m_Position: {x: 1044, y: -72, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102176584943539554}
+    m_Position: {x: 984, y: 0, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102692273713968162}
+    m_Position: {x: 912, y: 96, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102845548064972420}
+    m_Position: {x: 588, y: -72, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102993595779596478}
+    m_Position: {x: 372, y: -456, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102226622458118362}
+    m_Position: {x: -96, y: -300, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102165486434009464}
+    m_Position: {x: 72, y: -228, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102466108971157090}
+    m_Position: {x: 528, y: 156, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102282987960790376}
+    m_Position: {x: 240, y: 84, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_AnyStatePosition: {x: 72, y: -456, z: 0}
+  m_EntryPosition: {x: 132, y: -408, z: 0}
+  m_ExitPosition: {x: -48, y: -48, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102733966582217146}
+  m_DefaultState: {fileID: 1102165130844378004}
 --- !u!1107 &1107162901301049854
 AnimatorStateMachine:
   serializedVersion: 5
@@ -3699,63 +3680,6 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1102552624728348102}
---- !u!1107 &1107298229318873470
-AnimatorStateMachine:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: WeaponOn
-  m_ChildStates:
-  - serializedVersion: 1
-    m_State: {fileID: 1102176584943539554}
-    m_Position: {x: 348, y: -12, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102692273713968162}
-    m_Position: {x: 492, y: 36, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102505986416252064}
-    m_Position: {x: 492, y: -180, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102320480949984632}
-    m_Position: {x: 240, y: -72, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102230602829579306}
-    m_Position: {x: 144, y: -120, z: 0}
-  m_ChildStateMachines: []
-  m_AnyStateTransitions: []
-  m_EntryTransitions: []
-  m_StateMachineTransitions: {}
-  m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 96, y: 12, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
-  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102176584943539554}
---- !u!1107 &1107425066810751964
-AnimatorStateMachine:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: KnockOut
-  m_ChildStates:
-  - serializedVersion: 1
-    m_State: {fileID: 1102466108971157090}
-    m_Position: {x: 0, y: 0, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102282987960790376}
-    m_Position: {x: 0, y: 0, z: 0}
-  m_ChildStateMachines: []
-  m_AnyStateTransitions: []
-  m_EntryTransitions: []
-  m_StateMachineTransitions: {}
-  m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
-  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102466108971157090}
 --- !u!1107 &1107611653426157642
 AnimatorStateMachine:
   serializedVersion: 5
@@ -3774,57 +3698,3 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 0}
---- !u!1107 &1107770740361146628
-AnimatorStateMachine:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: DrawSword
-  m_ChildStates:
-  - serializedVersion: 1
-    m_State: {fileID: 1102843046582378830}
-    m_Position: {x: 0, y: 0, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102964527918894944}
-    m_Position: {x: 0, y: 0, z: 0}
-  m_ChildStateMachines: []
-  m_AnyStateTransitions: []
-  m_EntryTransitions: []
-  m_StateMachineTransitions: {}
-  m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
-  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102843046582378830}
---- !u!1107 &1107961017149371488
-AnimatorStateMachine:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: WeaponOff
-  m_ChildStates:
-  - serializedVersion: 1
-    m_State: {fileID: 1102165130844378004}
-    m_Position: {x: 276, y: 36, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102226622458118362}
-    m_Position: {x: 432, y: -96, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102165486434009464}
-    m_Position: {x: 108, y: -120, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102993595779596478}
-    m_Position: {x: 516, y: 180, z: 0}
-  m_ChildStateMachines: []
-  m_AnyStateTransitions: []
-  m_EntryTransitions: []
-  m_StateMachineTransitions: {}
-  m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
-  m_ParentStateMachinePosition: {x: 576, y: 24, z: 0}
-  m_DefaultState: {fileID: 1102165130844378004}

@@ -43,9 +43,5 @@ public class DrawSword : MonoBehaviour {
             SwordInHip.SetActive(true);
             SwordInHand.SetActive(false);
         }
-
     }
-
-
-
 }
