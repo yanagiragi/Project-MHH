@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackAlter : MonoBehaviour {
 
     public bool isDebug;
-
+    
     [Header("Control")]
 
     [SerializeField]

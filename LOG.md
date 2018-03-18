@@ -343,7 +343,7 @@
 
     </details>
 
-* Day 3:
+* Day 4:
     
     > AI 簡單構想
 
@@ -458,7 +458,7 @@
 
     </details>
 
-* Day 4
+* Day 5
 
     > 用 SubStateMachine + UnityStandardAssets裡面的範例把Haku的Animator重購了一次
 
@@ -513,11 +513,11 @@
 
     </details>
 
-* Day 5
+* Day 6
 
     > 昨天讓 P 先生試玩的心得
             
-        * 沒把滑鼠隱藏 (應該是把lock cursor勾起來就好了)
+        * 沒把滑鼠隱藏 (應該是把lock cursor勾起來就好了 )
 
         * 新操作方式比較好
 
@@ -526,3 +526,8 @@
         * 滑鼠靈敏度不夠
         
         * 如果你想讓玩家看不到內褲，也許你可以把"攝影機地面" 移到腰部左右的高度。這是我見過最可惡的設計 (轉貼原文)
+
+    > 現在的火龍翅膀部分的collider沒有綁得很漂亮 不過至少倒地時還可以
+
+
+    > DustLoRes : loading 畫面
