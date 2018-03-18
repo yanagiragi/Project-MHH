@@ -11,7 +11,8 @@ public class CollideMonster : MonoBehaviour {
     public AttackAlter attackInstance;
     public bool canHit;
     public float interval;
-    public GameObject Prefab;
+    public GameObject hitParticlePrefab;
+    public GameObject DebugPrefab;
 
     string[] monsterHitboxTags =
     {
@@ -47,7 +48,7 @@ public class CollideMonster : MonoBehaviour {
         yield return new WaitForSeconds(.05f);
         canHit = true;
 
-        specialFlag = true;
+        //specialFlag = true;
 
         if (attackInstance.attackNum == 1)
         {
@@ -55,7 +56,7 @@ public class CollideMonster : MonoBehaviour {
         }
         else
         {
-            yield return new WaitForSeconds(3f);
+           // yield return new WaitForSeconds(3f);
 
             specialFlag = false;
         }
@@ -64,7 +65,7 @@ public class CollideMonster : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        // No Need For Now
+        ////No Need For Now
         //if (!specialFlag && canHit && attackInstance.startAttackFlag && other.gameObject.CompareTag("TailHitBox") && attackInstance.attackNum == 1)
         //{
         //    // delay a bit
@@ -91,10 +92,17 @@ public class CollideMonster : MonoBehaviour {
 
             Debug.Log("Hit " + monsterHitboxTags[matchTagIndex]);
 
+            GameObject hitParticle = Instantiate(hitParticlePrefab, hitPos, Quaternion.identity);
+            hitParticle.transform.localScale = Vector3.one;
+
+            // Special Effect?
+            //hitParticle.transform.localScale = Vector3.one * 100f;
+
             if (isDebug)
             {   
-                GameObject g = Instantiate(Prefab, hitPos, Quaternion.identity, other.gameObject.transform.parent);
-                //g.transform.localScale = new Vector3(1f / g.transform.parent.lossyScale.x, 1f / g.transform.parent.lossyScale.y, 1f / g.transform.parent.lossyScale.z);
+                GameObject g = Instantiate(DebugPrefab, hitPos, Quaternion.identity, other.gameObject.transform.parent);
+                
+                g.transform.localScale = new Vector3(1f / g.transform.parent.lossyScale.x, 1f / g.transform.parent.lossyScale.y, 1f / g.transform.parent.lossyScale.z);
                 g.transform.localScale = Vector3.one * 100f;
                 int hitNum = attackInstance.attackNum;
 
