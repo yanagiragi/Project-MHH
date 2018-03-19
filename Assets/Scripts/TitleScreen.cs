@@ -12,14 +12,16 @@ public class TitleScreen : MonoBehaviour {
     public GameObject Text;
 
     void Start () {
-	    //if(GlobalGameManager.Instance.playCount >= 1)
-     //   {
-     //       HixboxModeToggle.SetActive(true);
-     //   }
-     //   else
-     //   {
-     //       HixboxModeToggle.SetActive(false);
-     //   }
+        Text.SetActive(GlobalGameManager.masterMode);
+        
+        //if(GlobalGameManager.Instance.playCount >= 1)
+        //   {
+        //       HixboxModeToggle.SetActive(true);
+        //   }
+        //   else
+        //   {
+        //       HixboxModeToggle.SetActive(false);
+        //   }
 
         //if (GlobalGameManager.Instance.playCount >= 2)
         //{
