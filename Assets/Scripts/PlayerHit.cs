@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class PlayerHit : MonoBehaviour {
 
-    
+    public GameObject GameOverUIObj;
+    public HealthController playerHealthController;
+    public int damage = 20;
     public Animator playerAnim;
     public MonsterAI monsterAIInstance;
     
     public bool canHit;
+
+    private bool isEnd = false;
 
     string[] monsterHitboxTags =
     {
@@ -64,15 +68,47 @@ public class PlayerHit : MonoBehaviour {
 
         playerAnim.SetBool("Hit", true);
         playerAnim.SetLayerWeight(1, 0);
+
+        playerHealthController.updateHealth(-1 * damage);
+
+        if(playerHealthController.healthInstance.hp <= 0)
+        {
+            cleanUp();
+        }
+
+        if (!isEnd)
+        {
+            yield return new WaitForSeconds(.1f);
+
+            playerAnim.SetBool("Hit", false);
+
+            yield return new WaitForSeconds(3.7f);
+            playerAnim.SetLayerWeight(1, 1);
+
+            yield return new WaitForSeconds(1f);
+            canHit = true;
+        }
+    }
+
+    void cleanUp()
+    {
+        isEnd = true;
+        playerAnim.SetLayerWeight(1, 0);
+        playerAnim.SetTrigger("Die");
+        playerAnim.GetComponent<ThirdPersonUserControl>().enabled = false;
+        playerAnim.GetComponent<AttackAlter>().enabled = false;
+        this.enabled = false;
+
+        // Play GameOver Effects
+        StartCoroutine(PlayGameOver());
         
-        yield return new WaitForSeconds(.1f);
+    }
 
-        playerAnim.SetBool("Hit", false);
+    IEnumerator PlayGameOver()
+    {
+        yield return new WaitForSeconds(2f);
+        GameOverUIObj.SetActive(true);
 
-        yield return new WaitForSeconds(3.7f);
-        playerAnim.SetLayerWeight(1, 1);
-
-        yield return new WaitForSeconds(1f);
-        canHit = true;
+        // Do Something
     }
 }

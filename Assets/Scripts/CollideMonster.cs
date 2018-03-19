@@ -6,6 +6,10 @@ public class CollideMonster : MonoBehaviour {
 
     public bool isDebug;
 
+    public HealthController MonsterHealthController;
+
+    public int[] monsterDamage;
+
     //public GameObject MonsterInstance;
 
     public AttackAlter attackInstance;
@@ -13,6 +17,8 @@ public class CollideMonster : MonoBehaviour {
     public float interval;
     public GameObject hitParticlePrefab;
     public GameObject DebugPrefab;
+
+    bool isEnd = false;
 
     string[] monsterHitboxTags =
     {
@@ -33,7 +39,6 @@ public class CollideMonster : MonoBehaviour {
 		if(!attackInstance.startAttackFlag)
         {
             specialFlag = false;
-
         }
 	}
 
@@ -96,7 +101,18 @@ public class CollideMonster : MonoBehaviour {
             hitParticle.transform.localScale = Vector3.one;
 
             // Special Effect?
-            //hitParticle.transform.localScale = Vector3.one * 100f;
+            // hitParticle.transform.localScale = Vector3.one * 100f;
+
+            MonsterHealthController.updateHealth(-1 * monsterDamage[matchTagIndex]);
+
+            if(MonsterHealthController.healthInstance.hp <= 0)
+            {
+                isEnd = true;
+
+                MonsterHealthController.gameObject.GetComponent<MonsterAI>().enabled = false;
+
+                MonsterHealthController.gameObject.GetComponent<Animator>().SetTrigger("Die");
+            }
 
             if (isDebug)
             {   
