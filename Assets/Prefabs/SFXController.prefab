@@ -51,3 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f6b6913655ee284c8aa2eeb212910b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RoarWalkSFX: {fileID: 0}
+  RoarAirSFX: {fileID: 0}
+  Roar3SFX: {fileID: 0}
+  DrawSwordSFX: {fileID: 0}
+  Attack3SFX: {fileID: 0}
