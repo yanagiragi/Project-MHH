@@ -9,37 +9,41 @@ public class TitleScreen : MonoBehaviour {
     public GameObject HixboxModeToggle;
     public GameObject MasterModeToggle;
 
-    void Start () {
-	    if(GlobalGameManager.Instance.playCount >= 1)
-        {
-            HixboxModeToggle.SetActive(true);
-        }
-        else
-        {
-            HixboxModeToggle.SetActive(false);
-        }
+    public GameObject Text;
 
-        if (GlobalGameManager.Instance.playCount >= 2)
-        {
-            MasterModeToggle.SetActive(true);
-        }
-        else
-        {
-            MasterModeToggle.SetActive(false);
-        }
+    void Start () {
+	    //if(GlobalGameManager.Instance.playCount >= 1)
+     //   {
+     //       HixboxModeToggle.SetActive(true);
+     //   }
+     //   else
+     //   {
+     //       HixboxModeToggle.SetActive(false);
+     //   }
+
+        //if (GlobalGameManager.Instance.playCount >= 2)
+        //{
+        //    MasterModeToggle.SetActive(true);
+        //}
+        //else
+        //{
+        //    MasterModeToggle.SetActive(false);
+        //}
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        Debug.Log(HixboxModeToggle.GetComponent<UnityEngine.UI.Toggle>().isOn);
-
-        Debug.Log(MasterModeToggle.GetComponent<UnityEngine.UI.Toggle>().isOn);
-
-		if (Input.GetKeyDown(KeyCode.Space) && isPreformed)
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            GlobalGameManager.hitBoxMode = HixboxModeToggle.GetComponent<UnityEngine.UI.Toggle>().isOn;
-            GlobalGameManager.masterMode = MasterModeToggle.GetComponent<UnityEngine.UI.Toggle>().isOn;
+            Text.SetActive(!Text.activeSelf);
+            GlobalGameManager.masterMode = !GlobalGameManager.masterMode;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && isPreformed)
+        {
+            //GlobalGameManager.hitBoxMode = HixboxModeToggle.GetComponent<UnityEngine.UI.Toggle>().isOn;
+            //GlobalGameManager.masterMode = MasterModeToggle.GetComponent<UnityEngine.UI.Toggle>().isOn;
             isPreformed = false;
             UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MainScene");
         }
