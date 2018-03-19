@@ -5,7 +5,8 @@ using UnityEngine;
 public class AttackAlter : MonoBehaviour {
 
     public bool isDebug;
-    
+    public GameObject bottle;
+
     [Header("Control")]
 
     [SerializeField]
@@ -99,6 +100,7 @@ public class AttackAlter : MonoBehaviour {
             attackNum = 0;
             inputH = 0;
             inputV = 0;
+            bottle.SetActive(false);
             animController.SetInteger("Attack", 0);
             animController.SetLayerWeight(1, 0);
             return;
@@ -220,9 +222,18 @@ public class AttackAlter : MonoBehaviour {
 
     IEnumerator PreformDrink()
     {
+        
         yield return new WaitForEndOfFrame();
 
         animController.SetBool("UsingItem", false);
+
+        yield return new WaitForSeconds(1f);
+
+        bottle.SetActive(true);
+
+        yield return new WaitForSeconds(3f);
+
+        bottle.SetActive(false);
     }
 
     IEnumerator DelayAdjustWeight(int layer, float weight)
