@@ -111,7 +111,7 @@ public class AttackAlter : MonoBehaviour {
         inputH = Input.GetAxis("Horizontal");
         inputV = Input.GetAxis("Vertical");
         
-        if (BottleController.nowCount < BottleController.totalCount && Input.GetKeyDown(KeyCode.Q) && canRoll && !isRoll && canStartAttackFlag && !startAttackFlag)
+        if (BottleController.nowCount < BottleController.totalCount && !isDrinking && Input.GetKeyDown(KeyCode.Q) && canRoll && !isRoll && canStartAttackFlag && !startAttackFlag)
         {
             animController.SetBool("UsingItem", true);
             isDrinking = true;
@@ -243,7 +243,7 @@ public class AttackAlter : MonoBehaviour {
 
         bottle.SetActive(false);
 
-        
+        isDrinking = false;
     }
 
     IEnumerator DelayAdjustWeight(int layer, float weight)

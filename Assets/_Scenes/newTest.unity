@@ -7203,7 +7203,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100030, guid: 452705b14873f3c4e91eca003157d693, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 13700000, guid: 452705b14873f3c4e91eca003157d693, type: 3}
       propertyPath: m_Materials.Array.data[3]
