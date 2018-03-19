@@ -6,6 +6,9 @@ public class CollideMonster : MonoBehaviour {
 
     public bool isDebug;
 
+    public GameObject player;
+    public GameObject gameOverUI;
+
     public HealthController MonsterHealthController;
 
     public AudioSource[] HitSFX;
@@ -57,16 +60,12 @@ public class CollideMonster : MonoBehaviour {
         yield return new WaitForSeconds(.05f);
         canHit = true;
 
-        //specialFlag = true;
-
         if (attackInstance.attackNum == 1)
         {
             specialFlag = false;
         }
         else
         {
-           // yield return new WaitForSeconds(3f);
-
             specialFlag = false;
         }
         
@@ -74,14 +73,6 @@ public class CollideMonster : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        ////No Need For Now
-        //if (!specialFlag && canHit && attackInstance.startAttackFlag && other.gameObject.CompareTag("TailHitBox") && attackInstance.attackNum == 1)
-        //{
-        //    // delay a bit
-        //    canHit = false;
-        //    StartCoroutine(DelayHit());
-        //}
-
         int matchTagIndex = 0;
         foreach(string str in monsterHitboxTags)
         {
@@ -125,9 +116,28 @@ public class CollideMonster : MonoBehaviour {
             {
                 isEnd = true;
 
+                AttackAlter playerAtk = player.GetComponent<AttackAlter>();
+                if (playerAtk)
+                    playerAtk.enabled = false;
+
+                ThirdPersonUserControl tpc = player.GetComponent<ThirdPersonUserControl>();
+                if(tpc)
+                    tpc.enabled = false;
+
+                Animator anim = player.GetComponent<Animator>();
+                if (anim)
+                {
+                    anim.SetInteger("Attack", 0);
+                    anim.SetFloat("Move", 0);
+                    anim.SetFloat("Turn", 0);
+                    anim.SetBool("Run", false);
+                }
+
                 MonsterHealthController.gameObject.GetComponent<MonsterAI>().enabled = false;
 
                 MonsterHealthController.gameObject.GetComponent<Animator>().SetTrigger("Die");
+
+                StartCoroutine(GameOver());
             }
 
             if (isDebug)
@@ -150,25 +160,22 @@ public class CollideMonster : MonoBehaviour {
                         g.GetComponent<Renderer>().material.color = Color.blue;
                         break;
                 }
-
-                //GameObject.Find("ern001_1").GetComponent<Animator>().SetInteger("Hit", 1);
             }
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    IEnumerator GameOver()
     {
-        if (canHit)
+        if(gameOverUI != null)
         {
-            //Debug.Log("2");
-        }
-    }
+            player.GetComponent<AttackAlter>().enabled = false;
+            player.GetComponent<ThirdPersonUserControl>().enabled = false;
+            player.GetComponent<Animator>().SetInteger("Attack", 0);
+            yield return new WaitForSeconds(8f);
 
-    private void OnTriggerEXit(Collider other)
-    {
-        if (canHit && attackInstance.startAttackFlag && other.gameObject.CompareTag("TailHitBox"))
-        {
-            Debug.Log("3");
+            gameOverUI.SetActive(true);
         }
+        
     }
+    
 }

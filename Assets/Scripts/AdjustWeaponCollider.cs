@@ -24,17 +24,19 @@ public class AdjustWeaponCollider : MonoBehaviour {
 	
     IEnumerator sizeCollider()
     {
-        BiggerSword.SetActive(true);
+        if(!GlobalGameManager.masterMode)
+            BiggerSword.SetActive(true);
 
         colliderSelf.size = new Vector3(m_ScaleX * 2f, m_ScaleY * 5f, m_ScaleZ * 2f);
 
         yield return new WaitForSeconds(1f);
 
-        Debug.Log("Change Back Sword Collider Size");
+        // Debug.Log("Change Back Sword Collider Size");
 
         colliderSelf.size = new Vector3(m_ScaleX, m_ScaleY, m_ScaleZ);
 
-        BiggerSword.SetActive(false);
+        if (!GlobalGameManager.masterMode)
+            BiggerSword.SetActive(false);
 
         isSizing = false;
     }

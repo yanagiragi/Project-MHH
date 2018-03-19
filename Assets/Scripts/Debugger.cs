@@ -15,7 +15,14 @@ public class Debugger : MonoBehaviour {
     public bool showMonsterHitBoxOnly = false;
 
     void Start () {
-		
+        if (GlobalGameManager.hitBoxMode)
+        {
+            showMonsterHitBoxOnly = true;
+        }
+        else
+        {
+            showMonsterHitBoxOnly = false;
+        }
 	}
 
     private void Trigger()
@@ -48,10 +55,10 @@ public class Debugger : MonoBehaviour {
 
     void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            isDebug = !isDebug;
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    isDebug = !isDebug;
+        //}
 
         Trigger();
     }

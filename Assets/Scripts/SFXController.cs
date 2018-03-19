@@ -9,16 +9,7 @@ public class SFXController : MonoBehaviour {
     public AudioSource Roar3SFX;
     public AudioSource DrawSwordSFX;
     public AudioSource Attack3SFX;
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+    
     public void Roar1()
     {
         Roar3SFX.Play();
@@ -36,13 +27,18 @@ public class SFXController : MonoBehaviour {
 
     public void DrawSword()
     {
-        Debug.Log("Draw!");
-        DrawSwordSFX.Play();
+        if (GetComponent<MasterMode>().enabled)
+            GetComponent<MasterMode>().BiggerSword.SetActive(true);
+    }
+
+    public void SheathSword()
+    {
+        if (GetComponent<MasterMode>().enabled)
+            GetComponent<MasterMode>().BiggerSword.SetActive(false);
     }
 
     public void Attack3()
     {
-        Debug.Log("Draw!");
         Attack3SFX.Play();
     }
 }

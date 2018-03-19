@@ -374,7 +374,7 @@ public class MonsterAI : MonoBehaviour {
 
             if (i == previousAtk)
             {
-                if (i != attackThresholdAir.Length - 1)
+                if (i < attackThresholdAir.Length - 1)
                     ++i;
                 else
                     i = 0;
