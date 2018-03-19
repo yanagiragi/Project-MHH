@@ -8,6 +8,10 @@ public class CollideMonster : MonoBehaviour {
 
     public HealthController MonsterHealthController;
 
+    public AudioSource[] HitSFX;
+
+    int SFXindex = 0;
+
     public int[] monsterDamage;
 
     //public GameObject MonsterInstance;
@@ -96,6 +100,18 @@ public class CollideMonster : MonoBehaviour {
             Vector3 hitPos = other.ClosestPointOnBounds(transform.position);
 
             Debug.Log("Hit " + monsterHitboxTags[matchTagIndex]);
+
+            
+            if(SFXindex >= (HitSFX.Length))
+            {
+                SFXindex = 0;
+            }
+            else
+            {
+                HitSFX[SFXindex].Play();
+                ++SFXindex;
+
+            }
 
             GameObject hitParticle = Instantiate(hitParticlePrefab, hitPos, Quaternion.identity);
             hitParticle.transform.localScale = Vector3.one;
