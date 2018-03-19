@@ -6,6 +6,7 @@ public class AttackAlter : MonoBehaviour {
 
     public bool isDebug;
     public GameObject bottle;
+    public HealthController healthControllerInstance;
 
     [Header("Control")]
 
@@ -110,7 +111,7 @@ public class AttackAlter : MonoBehaviour {
         inputH = Input.GetAxis("Horizontal");
         inputV = Input.GetAxis("Vertical");
         
-        if (Input.GetKeyDown(KeyCode.Q) && canRoll && !isRoll && canStartAttackFlag && !startAttackFlag)
+        if (BottleController.nowCount < BottleController.totalCount && Input.GetKeyDown(KeyCode.Q) && canRoll && !isRoll && canStartAttackFlag && !startAttackFlag)
         {
             animController.SetBool("UsingItem", true);
             isDrinking = true;
@@ -222,6 +223,7 @@ public class AttackAlter : MonoBehaviour {
 
     IEnumerator PreformDrink()
     {
+        bottle.GetComponent<BottleController>().Use();
         
         yield return new WaitForEndOfFrame();
 
@@ -233,7 +235,15 @@ public class AttackAlter : MonoBehaviour {
 
         yield return new WaitForSeconds(3f);
 
+        // Not interrupted
+        if (isDrinking)
+        {
+            healthControllerInstance.updateHealth(40);
+        }
+
         bottle.SetActive(false);
+
+        
     }
 
     IEnumerator DelayAdjustWeight(int layer, float weight)

@@ -4327,7 +4327,7 @@ Prefab:
     - target: {fileID: 114351413679132808, guid: 8c467e423ecb73345883de8e09c7762c,
         type: 2}
       propertyPath: hp
-      value: 100
+      value: 40100
       objectReference: {fileID: 0}
     - target: {fileID: 114351413679132808, guid: 8c467e423ecb73345883de8e09c7762c,
         type: 2}
@@ -6133,6 +6133,20 @@ GameObject:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 05eee680203b2cf4f94c76eeae051548, type: 3}
   m_PrefabInternal: {fileID: 2042010908}
+--- !u!114 &683083537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 683083535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58628527bd9457542bac3fcc6408d243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image1: {fileID: 460920175}
+  image2: {fileID: 25773365}
+  image3: {fileID: 877668970}
 --- !u!1 &694167493
 GameObject:
   m_ObjectHideFlags: 0
@@ -8262,6 +8276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDebug: 0
   bottle: {fileID: 683083535}
+  healthControllerInstance: {fileID: 874108205}
   inputH: 0
   inputV: 0
   canWalk: 1
