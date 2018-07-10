@@ -1,5 +1,7 @@
 # ProjectMHH
 
+# 此專案尚未重構打擊判定，重構的版本請參考 Project Haku
+
 # 主流程
 
 主選單 > 選任務 > 單一關卡 > END
